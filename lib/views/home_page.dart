@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:thirumathikart_seller/controllers/home_controller.dart';
+import 'package:thirumathikart_seller/models/product.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -10,10 +11,29 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) => Scaffold(
         appBar: appBar('Home'),
         body: Center(
-          child: Text(
-            'Seller App',
-            style: Theme.of(context).textTheme.headline4,
-          ),
-        ),
+            child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/addEditProduct',
+                    arguments: Product(
+                        name: 'product_name',
+                        price: '100',
+                        imageUrl:
+                            'https://aaveg.in/22/assets/images/team/110120090.jpg',
+                        quantity: '100',
+                        description: 'okay',
+                        category: 'Two'));
+              },
+              child: const Text('Edit Product'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/addEditProduct', arguments: Product());
+              },
+              child: const Text('Add Product'),
+            ),
+          ],
+        )), //TODO : Need to remove After PR review
       );
 }
