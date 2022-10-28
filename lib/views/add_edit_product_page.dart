@@ -25,6 +25,29 @@ class AddEditProductPage extends GetView<ProductsController> {
           key: _formkey,
           child: Column(
             children: [
+              Obx(() => GestureDetector(
+                    child: SizedBox(
+                      width: 200,
+                      height: 200,
+                      child: Container(
+                        decoration: controller.isImageAdded.value
+                            ? const BoxDecoration()
+                            : BoxDecoration(
+                                border: Border.all(color: Colors.black)),
+                        child: controller.isImageAdded.value
+                            ? Image.file(controller.image.value)
+                            : Get.arguments.imageUrl != null
+                                ? Image.network(Get.arguments.imageUrl)
+                                : const Center(
+                                    child: Text(
+                                        '\t \t \t No Image Added \n Click here to add image'),
+                                  ),
+                      ),
+                    ),
+                    onTap: () {
+                      controller.pickImage();
+                    },
+                  )),
               AddEditProductField(
                 productName: 'Name',
                 namecontroller: _nameController,
@@ -48,9 +71,9 @@ class AddEditProductPage extends GetView<ProductsController> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        height: 75,
+                        height: 72,
                         child: Padding(
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: DropdownButtonFormField(
                             decoration: const InputDecoration(
                               hintText: 'Enter Category',
@@ -80,28 +103,6 @@ class AddEditProductPage extends GetView<ProductsController> {
                 productName: 'Quantity',
                 namecontroller: _quantityController,
               ),
-              Obx(() => GestureDetector(
-                    child: SizedBox(
-                      width: 200,
-                      height: 200,
-                      child: Container(
-                        decoration: controller.isImageAdded.value
-                            ? const BoxDecoration()
-                            : BoxDecoration(
-                                border: Border.all(color: Colors.black)),
-                        child: controller.isImageAdded.value
-                            ? Image.file(controller.image.value)
-                            : Get.arguments.imageUrl != null
-                                ? Image.network(Get.arguments.imageUrl)
-                                : const Center(
-                                    child: Text('No Image Added'),
-                                  ),
-                      ),
-                    ),
-                    onTap: () {
-                      controller.pickImage();
-                    },
-                  )),
               ElevatedButton(
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
