@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:thirumathikart_seller/controllers/login_controller.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
 import 'package:thirumathikart_seller/widgets/button/login_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
@@ -108,30 +110,13 @@ class LoginPage extends StatelessWidget {
                             const LoginButton(),
                           ])),
                       const SizedBox(
-                        height: 70,
+                        height: 35,
                       ),
                       Container(
                         margin: const EdgeInsets.only(bottom: 40),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // InkWell(
-                            //   onTap: () {
-                            //     Get.toNamed(NavigationRoutes.registerRoute);
-                            //   },
-                            //   child: const Text(
-                            //     'Register Now',
-                            //     style: TextStyle(
-                            //         fontSize: 15,
-                            //         color: Color.fromARGB(255, 10, 49, 176),
-                            //         fontFamily: 'Avenir',
-                            //         fontWeight: FontWeight.w500,
-                            //         fontStyle: FontStyle.normal),
-                            //   ),
-                            // ),
-                            // const SizedBox(
-                            //   height: 10,
-                            // ),
                             InkWell(
                               onTap: () {},
                               child: const Text(

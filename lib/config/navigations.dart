@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:thirumathikart_seller/bindings/home_bindings.dart';
+import 'package:thirumathikart_seller/bindings/login_bindings.dart';
 import 'package:thirumathikart_seller/bindings/add_edit_products_binding.dart';
 import 'package:thirumathikart_seller/bindings/profile_bindings.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
@@ -28,6 +29,7 @@ class NavigationPages {
         GetPage(
           name: NavigationRoutes.loginRoute,
           page: () => const LoginPage(),
+          binding: LoginBindings(),
         ),
         GetPage(
           name: NavigationRoutes.profileRoute,
