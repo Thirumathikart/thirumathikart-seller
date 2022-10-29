@@ -1,48 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:thirumathikart_seller/models/address.dart';
 import 'package:thirumathikart_seller/models/seller.dart';
 
 class ProfileController extends GetxController {
   final seller = Seller(
     sellerId: 1,
-    name: 'Ram narain',
+    firstName: 'Ram',
+    lastName: 'Narain',
     accountNumber: 12345,
     mobileNumber: 9988776655,
-    address: 'No. 12, 2nd Street\nTiruchi, Tamil Nadu\n620015',
+    address: Address(
+      line_1: 'No. 12',
+      line_2: '2nd Street',
+      district: 'Tiruchi',
+      state: 'Tamil Nadu',
+      landmark: 'NIT Trichy',
+      pincode: 620015,
+      sellerId: 1,
+    ),
     ifscCode: 'HDFC0000000',
     email: 'ramnarain@gmail.com',
     memberCode: 100,
   ).obs;
-  final nameController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final accountNumberController = TextEditingController();
   final mobileNumberController = TextEditingController();
   final ifscCodeController = TextEditingController();
   final emailController = TextEditingController();
-  final addressController = TextEditingController();
+  final addressControllers = {
+    'Line 1': TextEditingController(),
+    'Line 2': TextEditingController(),
+    'District': TextEditingController(),
+    'State': TextEditingController(),
+    'Landmark': TextEditingController(),
+    'Pincode': TextEditingController()
+  };
   final memberCodeController = TextEditingController();
 
   void initialize() {
-    nameController.text = seller.value.name!;
+    firstNameController.text = seller.value.firstName!;
+    lastNameController.text = seller.value.lastName!;
     accountNumberController.text = seller.value.accountNumber!.toString();
     mobileNumberController.text = seller.value.mobileNumber!.toString();
     emailController.text = seller.value.email!;
-    addressController.text = seller.value.address!;
+    addressControllers['Line 1']!.text = seller.value.address!.line_1!;
+    addressControllers['Line 2']!.text = seller.value.address!.line_2!;
+    addressControllers['District']!.text = seller.value.address!.district!;
+    addressControllers['State']!.text = seller.value.address!.state!;
+    addressControllers['Landmark']!.text = seller.value.address!.landmark!;
+    addressControllers['Pincode']!.text =
+        seller.value.address!.pincode!.toString();
     ifscCodeController.text = seller.value.ifscCode!;
     memberCodeController.text = seller.value.memberCode!.toString();
   }
 
   final enable = {
-    'Name': false,
+    'First Name': false,
+    'Last Name': false,
     'Account Number': false,
     'Mobile Number': false,
     'IFSC Code': false,
-    'Address': false,
     'Email': false,
     'Member Code': false,
   }.obs;
 
-  void updateName(String name) {
-    seller.value.name = name;
+  final enableAddress = {
+    'Line 1': false,
+    'Line 2': false,
+    'District': false,
+    'State': false,
+    'Landmark': false,
+    'Pincode': false,
+  }.obs;
+
+  void updateFirstName(String firstName) {
+    seller.value.firstName = firstName;
+  }
+
+  void updateLastName(String lastName) {
+    seller.value.lastName = lastName;
   }
 
   void updateAccountNumber(int accountNumber) {
@@ -57,8 +95,20 @@ class ProfileController extends GetxController {
     seller.value.email = email;
   }
 
-  void updateAddress(String address) {
-    seller.value.address = address;
+  void updateAddress(String data, String subHeading) {
+    if (subHeading == 'Line 1') {
+      seller.value.address!.line_1 = data;
+    } else if (subHeading == 'Line 2') {
+      seller.value.address!.line_2 = data;
+    } else if (subHeading == 'District') {
+      seller.value.address!.district = data;
+    } else if (subHeading == 'State') {
+      seller.value.address!.state = data;
+    } else if (subHeading == 'Landmark') {
+      seller.value.address!.landmark = data;
+    } else if (subHeading == 'Pincode') {
+      seller.value.address!.pincode = int.parse(data);
+    }
   }
 
   void updateIfscCode(String ifscCode) {
@@ -69,40 +119,44 @@ class ProfileController extends GetxController {
     enable[key] = enable[key]! ? false : true;
   }
 
+  void switchFlagAddress(String key) {
+    enableAddress[key] = enableAddress[key]! ? false : true;
+  }
+
   void updateValue(String data, String heading) {
-    if (heading == 'Name') {
-      updateName(data);
+    if (heading == 'First Name') {
+      updateFirstName(data);
+    } else if (heading == 'Last Name') {
+      updateLastName(data);
     } else if (heading == 'Account Number') {
       updateAccountNumber(int.parse(data));
     } else if (heading == 'Mobile Number') {
       updateMobileNumber(int.parse(data));
     } else if (heading == 'IFSC Code') {
       updateIfscCode(data);
-    } else if (heading == 'Address') {
-      updateAddress(data);
     } else if (heading == 'Email') {
       updateEmail(data);
     }
   }
 
   bool validate(String data, String heading) {
-    if (heading == 'Name') {
-      return validateName(data);
+    if (heading == 'First Name') {
+      return validateName(data, firstNameController);
+    } else if (heading == 'Last Name') {
+      return validateName(data, lastNameController);
     } else if (heading == 'Account Number') {
       return validateAccountNumber(data);
     } else if (heading == 'Mobile Number') {
       return validateMobileNumber(data);
     } else if (heading == 'IFSC Code') {
       return validateIfscCode(data);
-    } else if (heading == 'Address') {
-      return validateAddress(data);
     } else if (heading == 'Email') {
       return validateEmailId(data);
     }
     return false;
   }
 
-  bool validateName(String name) {
+  bool validateName(String name, TextEditingController nameController) {
     name = name.trim();
     nameController.text = name;
     if (name != '' &&
@@ -157,14 +211,23 @@ class ProfileController extends GetxController {
     }
   }
 
-  bool validateAddress(String address) {
+  bool validateAddress(String subHeading, String address) {
     address = address.trim();
-    addressController.text = address;
-    if (address != '') {
-      return true;
+    addressControllers[subHeading]!.text = address;
+    if (subHeading == 'Pincode') {
+      if (int.tryParse(address) != null && address.length == 6) {
+        return true;
+      } else {
+        addressControllers[subHeading]!.text = '';
+        return false;
+      }
     } else {
-      addressController.text = '';
-      return false;
+      if (address != '') {
+        return true;
+      } else {
+        addressControllers[subHeading]!.text = '';
+        return false;
+      }
     }
   }
 

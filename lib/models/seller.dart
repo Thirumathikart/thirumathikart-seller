@@ -1,10 +1,14 @@
+import 'package:thirumathikart_seller/models/address.dart';
+
 class Seller {
-  String? name, email, address, ifscCode;
+  String? firstName, lastName, email, ifscCode;
   final int? sellerId;
   int? mobileNumber, accountNumber, memberCode;
+  Address? address;
   Seller({
     this.sellerId,
-    this.name,
+    this.firstName,
+    this.lastName,
     this.accountNumber,
     this.mobileNumber,
     this.address,
