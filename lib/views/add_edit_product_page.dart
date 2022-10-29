@@ -52,14 +52,16 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
           child: Column(
             children: [
               Obx(() => GestureDetector(
-                    child: SizedBox(
-                      width: 200,
-                      height: 200,
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      width: (MediaQuery.of(context).size.width).toInt() - 100,
+                      height: (MediaQuery.of(context).size.width).toInt() - 100,
                       child: Container(
                         decoration: controller.isImageAdded.value
                             ? const BoxDecoration()
                             : BoxDecoration(
-                                border: Border.all(color: Colors.black)),
+                                border: Border.all(color: AppTheme.textPrimary),
+                                borderRadius: BorderRadius.circular(15)),
                         child: controller.isImageAdded.value
                             ? Image.file(controller.image.value)
                             : Get.arguments.imageUrl != null
