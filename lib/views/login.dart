@@ -92,7 +92,7 @@ class LoginPage extends GetView<LoginController> {
                                   Radius.circular(10),
                                 ),
                                 elevation: 2,
-                                child: Expanded(
+                                child: SizedBox(
                                   child: Center(
                                     child: TextFormField(
                                       obscureText: true,

@@ -5,6 +5,7 @@ import 'package:thirumathikart_seller/widgets/app_bar.dart';
 import 'package:get/get.dart';
 import 'package:thirumathikart_seller/widgets/card/profile_address_card.dart';
 import 'package:thirumathikart_seller/widgets/card/profile_card.dart';
+import 'package:thirumathikart_seller/widgets/utils/app_button.dart';
 
 class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({Key? key}) : super(key: key);
@@ -180,8 +181,9 @@ class ProfilePage extends GetView<ProfileController> {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 40),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AppButton(buttonName: 'Save', onPressed: () => {}),
             ),
           ],
         ),
