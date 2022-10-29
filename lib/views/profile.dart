@@ -31,7 +31,6 @@ class ProfilePage extends GetView<ProfileController> {
 
     return Scaffold(
       appBar: appBar('Seller Profile'),
-      //drawer: const NavWidget(),
       body: SingleChildScrollView(
         child: Column(
           children: [
