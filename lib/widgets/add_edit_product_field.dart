@@ -50,29 +50,33 @@ class AddEditProductField extends GetView<ProductsController> {
                 Obx(
                   () => controller.isChange[productName]! ||
                           Get.routing.current == NavigationRoutes.addProduct
-                      ? TextFormField(
-                          controller: namecontroller,
-                          decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            contentPadding:
-                                const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
+                      ? Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          child: TextFormField(
+                            controller: namecontroller,
+                            decoration: InputDecoration(
+                              fillColor: AppTheme.bg,
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                borderSide: BorderSide(
+                                  color: AppTheme.textPrimary,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                borderSide:
+                                    BorderSide(color: AppTheme.textPrimary),
                               ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(color: Colors.black),
-                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter ${productName.toLowerCase()}';
+                              }
+                              return null;
+                            },
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter ${productName.toLowerCase()}';
-                            }
-                            return null;
-                          },
                         )
                       : Container(
                           width: double.infinity,
@@ -80,9 +84,9 @@ class AddEditProductField extends GetView<ProductsController> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 3, horizontal: 1),
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
+                              border: Border.all(color: AppTheme.textPrimary),
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey),
+                              color: AppTheme.searchBar),
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: Text(namecontroller.text,
@@ -95,10 +99,11 @@ class AddEditProductField extends GetView<ProductsController> {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 10, left: 0, right: 0, bottom: 0),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 10, left: 0, right: 0, bottom: 0),
             child: Divider(
-              color: Colors.grey,
+              color: AppTheme.searchBar,
               thickness: 1,
               indent: 10,
               endIndent: 10,

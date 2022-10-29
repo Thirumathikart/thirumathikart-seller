@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get.dart';
 import 'package:thirumathikart_seller/config/themes.dart';
+import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/controllers/products_controller.dart';
 
 class AddEditProductDropDown extends GetView<ProductsController> {
@@ -13,7 +13,7 @@ class AddEditProductDropDown extends GetView<ProductsController> {
   Widget build(BuildContext context) => Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+            margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -28,7 +28,11 @@ class AddEditProductDropDown extends GetView<ProductsController> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Obx(() => IconButton(
+                    Obx(
+                      () => Visibility(
+                        visible:
+                            Get.routing.current == NavigationRoutes.editProduct,
+                        child: IconButton(
                           onPressed: () {
                             controller.updateChange(productName);
                           },
@@ -39,23 +43,37 @@ class AddEditProductDropDown extends GetView<ProductsController> {
                               ? AppTheme.facebook
                               : AppTheme.chakra,
                           iconSize: 20,
-                        )),
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 Obx(
-                  () => controller.isChange[productName]!
-                      ? SizedBox(
+                  () => controller.isChange[productName]! ||
+                          Get.routing.current == NavigationRoutes.addProduct
+                      ? Container(
+                          margin: const EdgeInsets.only(top: 10),
                           width: double.infinity,
                           height: 50,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
                             child: DropdownButtonFormField(
                               isDense: true,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
+                                fillColor: AppTheme.bg,
                                 contentPadding:
-                                    EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                hintText: 'Enter Category',
-                                border: OutlineInputBorder(),
+                                    const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.textPrimary,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      BorderSide(color: AppTheme.textPrimary),
+                                ),
                               ),
                               isExpanded: false,
                               items: list
@@ -77,9 +95,9 @@ class AddEditProductDropDown extends GetView<ProductsController> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 3, horizontal: 1),
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
+                              border: Border.all(color: AppTheme.textPrimary),
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey),
+                              color: AppTheme.searchBar),
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: Text(controller.dropdownvalue.value,
@@ -92,10 +110,11 @@ class AddEditProductDropDown extends GetView<ProductsController> {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 10, left: 0, right: 0, bottom: 0),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 10, left: 0, right: 0, bottom: 0),
             child: Divider(
-              color: Colors.grey,
+              color: AppTheme.searchBar,
               thickness: 1,
               indent: 10,
               endIndent: 10,
