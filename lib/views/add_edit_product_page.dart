@@ -8,6 +8,7 @@ import 'package:thirumathikart_seller/models/product.dart';
 import 'package:thirumathikart_seller/widgets/AddEditProduct/add_edit_product_dropdown.dart';
 import 'package:thirumathikart_seller/widgets/AddEditProduct/add_edit_product_field.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
+import 'package:thirumathikart_seller/widgets/utils/app_button.dart';
 
 class AddEditProductPage extends GetView<AddEditProductsController> {
   AddEditProductPage({super.key});
@@ -26,6 +27,22 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
   final String buttonName = Get.routing.current == NavigationRoutes.addProduct
       ? 'Add Product'
       : 'Save Product';
+  void _saveForm() {
+    if (_formkey.currentState!.validate()) {
+      var product = Product(
+        name: _nameController.text,
+        price: _priceController.text,
+        category: controller.dropdownvalue.value,
+        description: _descController.text,
+        image: controller.image.value,
+        quantity: _quantityController.text,
+      );
+      controller.updateProduct(product);
+    } else {
+      Get.snackbar('Add/Update Product', 'Please fill all the fields');
+    }
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: appBar(name),
@@ -85,27 +102,7 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
                 productName: EditProductConstants.description,
                 namecontroller: _quantityController,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 15),
-                child: ElevatedButton(
-                    onPressed: () {
-                      if (_formkey.currentState!.validate()) {
-                        var product = Product(
-                          name: _nameController.text,
-                          price: _priceController.text,
-                          category: controller.dropdownvalue.value,
-                          description: _descController.text,
-                          image: controller.image.value,
-                          quantity: _quantityController.text,
-                        );
-                        controller.updateProduct(product);
-                      } else {
-                        Get.snackbar(
-                            'Add/Update Product', 'Please fill all the fields');
-                      }
-                    },
-                    child: Text(buttonName)),
-              )
+              AppButton(buttonName: buttonName, onPressed: _saveForm),
             ],
           ),
         )),
