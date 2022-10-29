@@ -71,7 +71,7 @@ class AddEditProductField extends GetView<AddEditProductsController> {
                               ),
                             ),
                             validator: (value) {
-                              if (value!.isEmpty) {
+                              if (value!.trim().isEmpty) {
                                 return 'Please enter ${productName.toLowerCase()}';
                               }
                               return null;
