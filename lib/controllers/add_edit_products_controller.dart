@@ -5,9 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart';
 import 'package:thirumathikart_seller/models/product.dart';
 
-class ProductsController extends GetxController {
+class AddEditProductsController extends GetxController {
   var product = Product().obs;
-  var dropdownvalue = 'One'.obs;
+  var dropdownvalue = EditProductConstants.categoryItems[0].obs;
   var isImageAdded = false.obs;
   var image = File('').obs;
   var isChange = {

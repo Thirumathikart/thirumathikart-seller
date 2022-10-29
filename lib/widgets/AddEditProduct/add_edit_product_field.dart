@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thirumathikart_seller/config/themes.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
-import 'package:thirumathikart_seller/controllers/products_controller.dart';
+import 'package:thirumathikart_seller/controllers/add_edit_products_controller.dart';
 
-class AddEditProductField extends GetView<ProductsController> {
+class AddEditProductField extends GetView<AddEditProductsController> {
   const AddEditProductField(
       {Key? key, required this.productName, required this.namecontroller})
       : super(key: key);

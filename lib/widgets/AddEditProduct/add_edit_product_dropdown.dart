@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thirumathikart_seller/config/themes.dart';
+import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
-import 'package:thirumathikart_seller/controllers/products_controller.dart';
+import 'package:thirumathikart_seller/controllers/add_edit_products_controller.dart';
 
-class AddEditProductDropDown extends GetView<ProductsController> {
-  AddEditProductDropDown({Key? key, required this.productName})
+class AddEditProductDropDown extends GetView<AddEditProductsController> {
+  const AddEditProductDropDown({Key? key, required this.productName})
       : super(key: key);
   final String productName;
-  final List<String> list = <String>['One', 'Two', 'Three', 'Four'];
   @override
   Widget build(BuildContext context) => Column(
         children: [
@@ -76,7 +76,7 @@ class AddEditProductDropDown extends GetView<ProductsController> {
                                 ),
                               ),
                               isExpanded: false,
-                              items: list
+                              items: EditProductConstants.categoryItems
                                   .map((e) => DropdownMenuItem(
                                         value: e,
                                         child: Text(e),
