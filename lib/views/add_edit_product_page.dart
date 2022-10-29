@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thirumathikart_seller/controllers/products_controller.dart';
+import 'package:thirumathikart_seller/config/themes.dart';
+import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart';
+import 'package:thirumathikart_seller/constants/navigation_routes.dart';
+import 'package:thirumathikart_seller/controllers/add_edit_products_controller.dart';
 import 'package:thirumathikart_seller/models/product.dart';
-import 'package:thirumathikart_seller/widgets/add_edit_product_field.dart';
+import 'package:thirumathikart_seller/widgets/AddEditProduct/add_edit_product_dropdown.dart';
+import 'package:thirumathikart_seller/widgets/AddEditProduct/add_edit_product_field.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
+import 'package:thirumathikart_seller/widgets/utils/app_button.dart';
 
-class AddEditProductPage extends GetView<ProductsController> {
+class AddEditProductPage extends GetView<AddEditProductsController> {
   AddEditProductPage({super.key});
   final _nameController =
       TextEditingController(text: '${Get.arguments.name ?? ''}');
@@ -15,25 +20,48 @@ class AddEditProductPage extends GetView<ProductsController> {
       TextEditingController(text: '${Get.arguments.description ?? ' '}');
   final _quantityController =
       TextEditingController(text: '${Get.arguments.quantity ?? ' '}');
-  final List<String> list = <String>['One', 'Two', 'Three', 'Four'];
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final String name = Get.routing.current == NavigationRoutes.addProduct
+      ? 'Add Product'
+      : 'Edit Product';
+  final String buttonName = Get.routing.current == NavigationRoutes.addProduct
+      ? 'Add Product'
+      : 'Save Product';
+  void _saveForm() {
+    if (_formkey.currentState!.validate()) {
+      var product = Product(
+        name: _nameController.text,
+        price: _priceController.text,
+        category: controller.dropdownvalue.value,
+        description: _descController.text,
+        image: controller.image.value,
+        quantity: _quantityController.text,
+      );
+      controller.updateProduct(product);
+    } else {
+      Get.snackbar('Add/Update Product', 'Please fill all the fields');
+    }
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Add/Edit Product'),
+        appBar: appBar(name),
         body: SingleChildScrollView(
             child: Form(
           key: _formkey,
           child: Column(
             children: [
               Obx(() => GestureDetector(
-                    child: SizedBox(
-                      width: 200,
-                      height: 200,
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      width: (MediaQuery.of(context).size.width).toInt() - 100,
+                      height: (MediaQuery.of(context).size.width).toInt() - 100,
                       child: Container(
                         decoration: controller.isImageAdded.value
                             ? const BoxDecoration()
                             : BoxDecoration(
-                                border: Border.all(color: Colors.black)),
+                                border: Border.all(color: AppTheme.textPrimary),
+                                borderRadius: BorderRadius.circular(15)),
                         child: controller.isImageAdded.value
                             ? Image.file(controller.image.value)
                             : Get.arguments.imageUrl != null
@@ -48,79 +76,35 @@ class AddEditProductPage extends GetView<ProductsController> {
                       controller.pickImage();
                     },
                   )),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 10, left: 0, right: 0, bottom: 0),
+                child: Divider(
+                  color: AppTheme.searchBar,
+                  thickness: 1,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+              ),
               AddEditProductField(
-                productName: 'Name',
+                productName: EditProductConstants.name,
                 namecontroller: _nameController,
               ),
               AddEditProductField(
-                productName: 'Price',
+                productName: EditProductConstants.price,
                 namecontroller: _priceController,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Category',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 72,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: DropdownButtonFormField(
-                            decoration: const InputDecoration(
-                              hintText: 'Enter Category',
-                              border: OutlineInputBorder(),
-                            ),
-                            isExpanded: true,
-                            items: list
-                                .map((e) => DropdownMenuItem(
-                                      value: e,
-                                      child: Text(e),
-                                    ))
-                                .toList(),
-                            value: controller.dropdownvalue.value,
-                            onChanged: (value) {
-                              controller.updateDropdownValue(value);
-                            },
-                          ),
-                        ),
-                      ),
-                    ]),
-              ),
+              const AddEditProductDropDown(
+                  productName: EditProductConstants.category),
               AddEditProductField(
-                productName: 'Description',
+                productName: EditProductConstants.quantity,
                 namecontroller: _descController,
               ),
               AddEditProductField(
-                productName: 'Quantity',
+                productName: EditProductConstants.description,
                 namecontroller: _quantityController,
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    if (_formkey.currentState!.validate()) {
-                      var product = Product(
-                        name: _nameController.text,
-                        price: _priceController.text,
-                        category: controller.dropdownvalue.value,
-                        description: _descController.text,
-                        image: controller.image.value,
-                        quantity: _quantityController.text,
-                      );
-                      controller.updateProduct(product);
-                    } else {
-                      Get.snackbar(
-                          'Add/Update Product', 'Please fill all the fields');
-                    }
-                  },
-                  child: const Text('Add Product'))
+              AppButton(buttonName: buttonName, onPressed: _saveForm),
             ],
           ),
         )),
