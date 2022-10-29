@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thirumathikart_seller/controllers/products_controller.dart';
 import 'package:thirumathikart_seller/models/product.dart';
+import 'package:thirumathikart_seller/widgets/add_edit_product_dropdown.dart';
 import 'package:thirumathikart_seller/widgets/add_edit_product_field.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
 
@@ -56,45 +57,7 @@ class AddEditProductPage extends GetView<ProductsController> {
                 productName: 'Price',
                 namecontroller: _priceController,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Category',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 72,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: DropdownButtonFormField(
-                            decoration: const InputDecoration(
-                              hintText: 'Enter Category',
-                              border: OutlineInputBorder(),
-                            ),
-                            isExpanded: true,
-                            items: list
-                                .map((e) => DropdownMenuItem(
-                                      value: e,
-                                      child: Text(e),
-                                    ))
-                                .toList(),
-                            value: controller.dropdownvalue.value,
-                            onChanged: (value) {
-                              controller.updateDropdownValue(value);
-                            },
-                          ),
-                        ),
-                      ),
-                    ]),
-              ),
+              AddEditProductDropDown(productName: 'Category'),
               AddEditProductField(
                 productName: 'Description',
                 namecontroller: _descController,

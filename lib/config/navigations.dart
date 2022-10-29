@@ -13,7 +13,12 @@ class NavigationPages {
           binding: HomeBindings(),
         ),
         GetPage(
-          name: NavigationRoutes.addEditProduct,
+          name: NavigationRoutes.editProduct,
+          page: AddEditProductPage.new,
+          binding: ProductsBinding(),
+        ),
+        GetPage(
+          name: NavigationRoutes.addProduct,
           page: AddEditProductPage.new,
           binding: ProductsBinding(),
         ),
