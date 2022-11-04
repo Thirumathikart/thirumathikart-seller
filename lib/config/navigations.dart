@@ -6,6 +6,8 @@ import 'package:thirumathikart_seller/bindings/past_orders_binding.dart';
 import 'package:thirumathikart_seller/bindings/todays_orders_bindings.dart';
 import 'package:thirumathikart_seller/bindings/profile_bindings.dart';
 import 'package:thirumathikart_seller/bindings/earning_bindings.dart';
+import 'package:thirumathikart_seller/bindings/order_bindings.dart';
+import 'package:thirumathikart_seller/bindings/product_bindings.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/views/add_edit_product_page.dart';
 import 'package:thirumathikart_seller/views/home_page.dart';
@@ -14,6 +16,8 @@ import 'package:thirumathikart_seller/views/past_orders.dart';
 import 'package:thirumathikart_seller/views/todays_orders.dart';
 import 'package:thirumathikart_seller/views/profile.dart';
 import 'package:thirumathikart_seller/views/earning.dart';
+import 'package:thirumathikart_seller/views/order_page.dart';
+import 'package:thirumathikart_seller/views/product_page.dart';
 
 class NavigationPages {
   static List<GetPage<dynamic>> getPages() => [
@@ -56,6 +60,16 @@ class NavigationPages {
           name: NavigationRoutes.pastOrdersRoute,
           page: () => const PastOrdersPage(),
           binding: PastOrdersBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.order,
+          page: () => const OrderPage(),
+          binding: OrderBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.product,
+          page: () => const ProductPage(),
+          binding: ProductBindings(),
         ),
       ];
 }
