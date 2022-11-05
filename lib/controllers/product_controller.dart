@@ -1,11 +1,116 @@
-import 'package:thirumathikart_seller/models/product.dart';
+import 'package:thirumathikart_seller/models/producttwo.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class ProductController extends GetxController {
+  //
+  //Remove after Adding Backend functionality
+  List<ProductTwo> productsList = [
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 10,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 20,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 30,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 40,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 50,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 60,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 70,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 80,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 90,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+    ProductTwo(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 100,
+      parentId: 201,
+      parentName: 'Vegetables',
+      details: 'Fresh Juicy Tomato',
+      quantity: 10,
+    ),
+  ];
+
+  //
   final textController = TextEditingController();
   final productsListDynamic = [].obs;
-  final flag = true.obs;
   final isSelected = [true, false].obs;
 
   void increaseQtyOfSelectedItem(int index) {
@@ -13,7 +118,7 @@ class ProductController extends GetxController {
         productsListDynamic[index].quantity! + 1;
   }
 
-  void decreaseQtyOfSelectedItem(int index, Product product) {
+  void decreaseQtyOfSelectedItem(int index, ProductTwo product) {
     if (product.quantity == 1) {
       productsListDynamic.removeAt(index);
     } else {
@@ -26,16 +131,12 @@ class ProductController extends GetxController {
     productsListDynamic.removeAt(index);
   }
 
-  void add(List productsList, Product item) {
+  void add(List productsList, ProductTwo item) {
     productsListDynamic.add(item);
   }
 
   void empty() {
     productsListDynamic([]);
-  }
-
-  void copy(List<Product> productsList) {
-    productsListDynamic(productsList);
   }
 
   int length() => productsListDynamic.length;
@@ -44,7 +145,9 @@ class ProductController extends GetxController {
     isSelected[index] = boolean;
   }
 
-  void switchFlag() {
-    flag(false);
+  @override
+  void onReady() {
+    productsListDynamic(productsList);
+    super.onReady();
   }
 }
