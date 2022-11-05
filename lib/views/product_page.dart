@@ -3,6 +3,8 @@ import 'package:thirumathikart_seller/config/themes.dart';
 import 'package:thirumathikart_seller/controllers/product_controller.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
 import 'package:get/get.dart';
+import 'package:thirumathikart_seller/models/product.dart';
+import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 
 class ProductPage extends GetView<ProductController> {
   const ProductPage({Key? key}) : super(key: key);
@@ -143,7 +145,18 @@ class ProductPage extends GetView<ProductController> {
                                         Icons.edit,
                                         color: Colors.grey,
                                       ),
-                                      onPressed: () => {},
+                                      onPressed: () => {
+                                        Get.toNamed(
+                                            NavigationRoutes.editProduct,
+                                            arguments: Product(
+                                                name: 'product_name',
+                                                price: '100',
+                                                imageUrl:
+                                                    'https://aaveg.in/22/assets/images/team/110120090.jpg',
+                                                quantity: '100',
+                                                description: 'okay',
+                                                category: 'Two'))
+                                      },
                                     ),
                                   ),
                                 ],
