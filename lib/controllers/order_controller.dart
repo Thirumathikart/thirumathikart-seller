@@ -5,8 +5,102 @@ import 'package:thirumathikart_seller/models/order.dart';
 class OrderController extends GetxController {
   final textController = TextEditingController();
   final ordersListDynamic = [].obs;
-  final flag = true.obs;
   final isSelected = [true, false].obs;
+  //
+  //Remove after Adding Backend functionality
+  List<Order> ordersList = [
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 10,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 20,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 30,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 40,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 50,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 60,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 70,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 80,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 90,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+    Order(
+      id: 101,
+      name: 'Tomato',
+      image: 'assets/tomato.jpg',
+      price: 100,
+      status: 'Prepared',
+      quantity: 20,
+      pickup: '',
+    ),
+  ];
+  //
   void setOrderType(String type, int index) {
     ordersListDynamic[index].pickup = type;
   }
@@ -23,17 +117,15 @@ class OrderController extends GetxController {
     ordersListDynamic([]);
   }
 
-  void copy(List<Order> ordersList) {
-    ordersListDynamic(ordersList);
-  }
-
   int length() => ordersListDynamic.length;
 
   void set(int index, bool boolean) {
     isSelected[index] = boolean;
   }
 
-  void switchFlag() {
-    flag(false);
+  @override
+  void onReady() {
+    ordersListDynamic(ordersList);
+    super.onReady();
   }
 }

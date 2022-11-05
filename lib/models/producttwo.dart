@@ -1,8 +1,8 @@
-class Product {
+class ProductTwo {
   final String? image, name, parentName, details;
   int? id, parentId, quantity = 0;
   final double? price;
-  Product({
+  ProductTwo({
     this.id,
     this.name,
     this.image,
