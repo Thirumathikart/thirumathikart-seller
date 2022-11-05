@@ -4,9 +4,6 @@ import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/controllers/home_controller.dart';
 import 'package:thirumathikart_seller/models/product.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
-import 'package:thirumathikart_seller/models/order.dart';
-import 'package:thirumathikart_seller/models/product.dart';
-import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
@@ -37,7 +34,36 @@ class HomePage extends GetView<HomeController> {
               },
               child: const Text('Add Product'),
             ),
+            Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 80,
+                width: 100,
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(color: Colors.red),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.offAndToNamed('/order');
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 80,
+                width: 100,
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(color: Colors.blue),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.offAndToNamed('/product');
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
           ],
-        )), //TODO : Need to remove After PR review
-      );
+        ))); //TODO : Need to remove After PR review
+        
 }
