@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:thirumathikart_seller/controllers/earning_controller.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
 import 'package:thirumathikart_seller/constants/earning_constants.dart';
+import 'package:thirumathikart_seller/config/themes.dart';
 
 class EarningPage extends GetView<EarningController> {
   const EarningPage({Key? key}) : super(key: key);
@@ -17,9 +18,9 @@ class EarningPage extends GetView<EarningController> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Total Earnings: ${list.length * 35.35}',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 20,
-                      color: Colors.black,
+                      color: AppTheme.textPrimary,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -29,21 +30,22 @@ class EarningPage extends GetView<EarningController> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'No. of Orders Completed: ${list.length}',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 20,
-                      color: Colors.black,
+                      color: AppTheme.textPrimary,
                       fontWeight: FontWeight.bold),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.all(20),
-                padding: const EdgeInsets.fromLTRB(100, 100, 100, 100),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                ),
-              ),
-              const Divider(
-                  color: Color.fromARGB(255, 60, 60, 60), thickness: 1),
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.fromLTRB(100, 100, 100, 100),
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage('assets/tklogo.jpeg')))),
+              Divider(
+                  color: AppTheme.divider,
+                  thickness: 1),
               ListView.builder(
                 itemBuilder: (context, index) => Card(
                   child: Padding(
@@ -58,19 +60,19 @@ class EarningPage extends GetView<EarningController> {
                         children: [
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 'Order #',
                                 style: TextStyle(
                                   fontSize: 17,
-                                  color: Colors.black,
+                                  color: AppTheme.textPrimary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 list[index]['order'].toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 17,
-                                  color: Colors.black,
+                                  color: AppTheme.textPrimary,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -78,36 +80,36 @@ class EarningPage extends GetView<EarningController> {
                           ),
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 'Date: ',
                                 style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.black,
+                                  color: AppTheme.textPrimary,
                                 ),
                               ),
                               Text(
                                 list[index]['date'].toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.black,
+                                  color: AppTheme.textPrimary,
                                 ),
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 'Earnings: ',
                                 style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.black,
+                                  color: AppTheme.textPrimary,
                                 ),
                               ),
                               Text(
                                 list[index]['earning'].toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.black,
+                                  color: AppTheme.textPrimary,
                                 ),
                               ),
                             ],
@@ -119,8 +121,8 @@ class EarningPage extends GetView<EarningController> {
                 primary: false,
                 shrinkWrap: true,
               ),
-              const Divider(
-                color: Color.fromARGB(255, 216, 216, 216),
+              Divider(
+                color: AppTheme.searchBar,
                 thickness: 1,
                 indent: 20,
                 endIndent: 20,
