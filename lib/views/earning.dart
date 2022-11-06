@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thirumathikart_seller/controllers/earning_controller.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
-
+import 'package:thirumathikart_seller/constants/earning_constants.dart';
 class EarningPage extends GetView<EarningController> {
   const EarningPage({Key? key}) : super(key: key);
   @override
@@ -129,26 +129,3 @@ class EarningPage extends GetView<EarningController> {
         ),
       );
 }
-
-var list = [
-  {
-    'order': 4,
-    'date': '21/03/2020',
-    'earning': 35.35,
-  },
-  {
-    'order': 69,
-    'date': '3/6/2021',
-    'earning': 35.35,
-  },
-  {
-    'order': 100,
-    'date': '6/11/2022',
-    'earning': 35.35,
-  },
-  {
-    'order': 81,
-    'date': '19/4/2018',
-    'earning': 35.35,
-  },
-];
