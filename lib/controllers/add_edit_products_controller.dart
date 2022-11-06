@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart';
