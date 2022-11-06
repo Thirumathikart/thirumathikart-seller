@@ -17,7 +17,7 @@ class EarningPage extends GetView<EarningController> {
                 margin: const EdgeInsets.fromLTRB(20, 15, 0, 0),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Total Earnings: ${list.length * 35.35}',
+                  'Total Earnings: ₹${list.length * 35.35}',
                   style: TextStyle(
                       fontSize: 20,
                       color: AppTheme.textPrimary,
@@ -97,7 +97,7 @@ class EarningPage extends GetView<EarningController> {
                           Row(
                             children: [
                               Text(
-                                'Earnings: ',
+                                'Earnings: ₹',
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: AppTheme.textPrimary,
