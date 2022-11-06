@@ -59,7 +59,7 @@ class EarningPage extends GetView<EarningController> {
                           Row(
                             children: [
                               Text(
-                                'Order #',
+                                'Order: ',
                                 style: TextStyle(
                                   fontSize: 17,
                                   color: AppTheme.textPrimary,
