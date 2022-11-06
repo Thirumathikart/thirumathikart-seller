@@ -43,9 +43,7 @@ class EarningPage extends GetView<EarningController> {
                       image: DecorationImage(
                           fit: BoxFit.fill,
                           image: AssetImage('assets/tklogo.jpeg')))),
-              Divider(
-                  color: AppTheme.divider,
-                  thickness: 1),
+              Divider(color: AppTheme.divider, thickness: 1),
               ListView.builder(
                 itemBuilder: (context, index) => Card(
                   child: Padding(
