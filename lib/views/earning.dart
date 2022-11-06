@@ -14,7 +14,7 @@ class EarningPage extends GetView<EarningController> {
           child: Column(
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(left: 20),
+                margin: const EdgeInsets.fromLTRB(20, 15, 0, 0),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Total Earnings: ${list.length * 35.35}',
