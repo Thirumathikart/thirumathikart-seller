@@ -83,133 +83,139 @@ class OrderPage extends GetView<OrderController> {
                 ),
               ),
               SingleChildScrollView(
-                child: Obx(
-                  () => SizedBox(
-                    height: MediaQuery.of(context).size.height - 120,
-                    child: ListView.builder(
-                      itemBuilder: (ctx, index) => Column(children: [
-                        Container(
-                          height: 200.0,
-                          margin: const EdgeInsets.only(left: 10, right: 10),
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppTheme.textPrimary),
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppTheme.textSecondary,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(width: 10.0),
-                              Expanded(
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          'Item : ${controller.ordersListDynamic[index].name!}',
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16.0),
+                child: Expanded(
+                  child: Obx(
+                    () => SizedBox(
+                      height: MediaQuery.of(context).size.height - 150,
+                      child: ListView.builder(
+                        itemBuilder: (ctx, index) => Column(children: [
+                          Container(
+                            height: 200.0,
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            padding: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppTheme.textPrimary),
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppTheme.textSecondary,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(width: 10.0),
+                                Expanded(
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 10.0),
+                                          child: Text(
+                                            'Item : ${controller.ordersListDynamic[index].name!}',
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16.0),
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          'Order Quantity : ${controller.ordersListDynamic[index].quantity!}',
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 10.0),
+                                          child: Text(
+                                            'Order Quantity : ${controller.ordersListDynamic[index].quantity!}',
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          'Total : ₹ ${controller.ordersListDynamic[index].price! * controller.ordersListDynamic[index].quantity!}',
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 10.0),
+                                          child: Text(
+                                            'Total : ₹ ${controller.ordersListDynamic[index].price! * controller.ordersListDynamic[index].quantity!}',
+                                          ),
                                         ),
-                                      ),
-                                      const Text(
-                                        'Order ready for pickup?',
-                                      ),
-                                      Obx(
-                                        () => SizedBox(
-                                          height: 30,
-                                          width: 120,
-                                          child: RadioListTile(
-                                              title: const Text('Yes'),
-                                              dense: true,
-                                              value: 'yes',
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30)),
-                                              groupValue: (controller
-                                                      .ordersListDynamic[index]
-                                                      .pickup)
-                                                  .toString(),
-                                              onChanged: (value) {
-                                                controller.setOrderType(
-                                                    value!, index);
-                                              }),
+                                        const Text(
+                                          'Order ready for pickup?',
                                         ),
-                                      ),
-                                      Obx(
-                                        () => SizedBox(
-                                          height: 30,
-                                          width: 120,
-                                          child: RadioListTile(
-                                              title: const Text('No'),
-                                              dense: true,
-                                              value: 'no',
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30)),
-                                              groupValue: (controller
-                                                      .ordersListDynamic[index]
-                                                      .pickup)
-                                                  .toString(),
-                                              onChanged: (value) {
-                                                controller.setOrderType(
-                                                    value!, index);
-                                              }),
+                                        Obx(
+                                          () => SizedBox(
+                                            height: 30,
+                                            width: 120,
+                                            child: RadioListTile(
+                                                title: const Text('Yes'),
+                                                dense: true,
+                                                value: 'yes',
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30)),
+                                                groupValue: (controller
+                                                        .ordersListDynamic[
+                                                            index]
+                                                        .pickup)
+                                                    .toString(),
+                                                onChanged: (value) {
+                                                  controller.setOrderType(
+                                                      value!, index);
+                                                }),
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 10.0),
-                                    ]),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 110.0,
-                                    height: 110.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(controller
-                                            .ordersListDynamic[index].image!),
+                                        Obx(
+                                          () => SizedBox(
+                                            height: 30,
+                                            width: 120,
+                                            child: RadioListTile(
+                                                title: const Text('No'),
+                                                dense: true,
+                                                value: 'no',
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30)),
+                                                groupValue: (controller
+                                                        .ordersListDynamic[
+                                                            index]
+                                                        .pickup)
+                                                    .toString(),
+                                                onChanged: (value) {
+                                                  controller.setOrderType(
+                                                      value!, index);
+                                                }),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10.0),
+                                      ]),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 110.0,
+                                      height: 110.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(controller
+                                              .ordersListDynamic[index].image!),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 20.0),
-                                  Text(
-                                    'Status : ${controller.ordersListDynamic[index].status!}',
-                                  ),
-                                ],
-                              )
-                            ],
+                                    const SizedBox(width: 20.0),
+                                    Text(
+                                      'Status : ${controller.ordersListDynamic[index].status!}',
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        const Divider(),
-                      ]),
-                      itemCount: controller.length(),
+                          const Divider(),
+                        ]),
+                        itemCount: controller.length(),
+                      ),
                     ),
                   ),
                 ),
