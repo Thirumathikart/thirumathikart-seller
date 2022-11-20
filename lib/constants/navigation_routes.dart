@@ -5,4 +5,6 @@ class NavigationRoutes {
   static String loginRoute = '/login';
   static String profileRoute = '/profile';
   static String earningRoute = '/earning';
+  static String todaysOrdersRoute='/todaysOrders';
+  static String pastOrdersRoute='/pastOrders';
 }
