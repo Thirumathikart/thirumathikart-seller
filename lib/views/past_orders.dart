@@ -16,64 +16,61 @@ class PastOrdersPage extends GetView<PastOrdersController> {
       itemCount: orderList.length,
       itemBuilder: listView
   );
-
   Widget listView(
       BuildContext context,
-      int position) => Card(
-      child: Column(
+      int position,) => Card(
+        child: Column(
           children: <Widget>[
             Container(margin: const EdgeInsets.only(left:10,top:5,bottom: 5,right:5),
                 alignment: Alignment.centerLeft,
                 child: Text('ORDER ID: ${orderList[position]['OrderID']}',
-                    style:
-                        TextStyle(fontSize: 23,
-                            letterSpacing: 0.5,
-                            color: AppTheme.textPrimary,
-                            fontWeight: FontWeight.bold))
+                    style: TextStyle(fontSize: 23,
+                        letterSpacing: 0.5,
+                        color: AppTheme.textPrimary,
+                        fontWeight: FontWeight.bold,),
+                ),
             ),
             Container(margin: const EdgeInsets.only(left:10,top:5,bottom: 5,right:5),
                 alignment: Alignment.centerLeft,
                 child: Text('Customer Name: ${orderList[position]['CustomerName']}',
                     style:TextStyle(fontSize: 17,
-                              letterSpacing: 0.5,
-                              color: AppTheme.textPrimary,)
-                )
+                      letterSpacing: 0.5,
+                      color: AppTheme.textPrimary,),
+                ),
             ),
             Container(margin: const EdgeInsets.only(left:10,top:5,bottom: 5,right:5),
                 alignment: Alignment.centerLeft,
                 child: Text('Customer Address: ${orderList[position]['CustomerAddress']}',
                     style:TextStyle(fontSize: 17,
-                                    letterSpacing: 0.5,
-                                    color: AppTheme.textPrimary,)
-                )
+                      letterSpacing: 0.5,
+                      color: AppTheme.textPrimary,),
+                ),
             ),
             Container(margin: const EdgeInsets.only(left:10,top:5,bottom: 5,right:5),
                 alignment: Alignment.centerLeft,
                 child: Text('Customer contact: ${orderList[position]['CustomerContact']}',
                     style: TextStyle(fontSize: 17,
                         letterSpacing: 0.5,color:
-                        AppTheme.textPrimary,)
-                )
+                        AppTheme.textPrimary,),
+                ),
             ),
             Container(margin: const EdgeInsets.only(left:10,top:5,bottom: 5,right:5),
                 alignment: Alignment.centerLeft,
                 child: Text('Total: ${orderList[position]['Total']}',
-                    style:
-                        TextStyle(fontSize: 17,
-                          letterSpacing: 0.5,
-                          color: AppTheme.textPrimary,)
-                )
+                    style: TextStyle(fontSize: 17,
+                      letterSpacing: 0.5,
+                      color: AppTheme.textPrimary,),
+                ),
             ),
             Container(margin: const EdgeInsets.only(left:10,top:5,bottom: 5,right:5),
                 alignment: Alignment.centerLeft,
                 child: Text('Payment: ${orderList[position]['Payment']}',
-                    style:
-                        TextStyle(fontSize: 17,
-                          letterSpacing: 0.5,
-                          color: AppTheme.textPrimary,)
-                )
+                    style: TextStyle(fontSize: 17,
+                      letterSpacing: 0.5,
+                      color: AppTheme.textPrimary,),
+                ),
             ),
           ],
-      ),
+        ),
   );
 }

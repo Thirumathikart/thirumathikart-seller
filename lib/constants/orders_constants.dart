@@ -22,5 +22,5 @@ var orderList=[
     'CustomerContact':'9988776655',
     'Total':'Rs.250.55',
     'Payment':'Pending'
-  }
+  },
 ];
