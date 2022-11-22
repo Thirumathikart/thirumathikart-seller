@@ -47,6 +47,12 @@ class HomePage extends GetView<HomeController> {
             },
             child: const Text('Order List'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(NavigationRoutes.map);
+            },
+            child: const Text('Tracking Map'),
+          ),
         ],
       ))); //TODO : Need to remove After PR review
 

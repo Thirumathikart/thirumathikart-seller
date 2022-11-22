@@ -85,13 +85,15 @@ class OrderPage extends GetView<OrderController> {
               SingleChildScrollView(
                 child: Expanded(
                   child: Obx(
-                    () => SizedBox(
+                    () => Container(
                       height: MediaQuery.of(context).size.height - 150,
+                      padding: const EdgeInsets.only(bottom: 20),
                       child: ListView.builder(
                         itemBuilder: (ctx, index) => Column(children: [
                           Container(
                             height: 200.0,
-                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            margin: const EdgeInsets.only(
+                                left: 10, right: 10, top: 8, bottom: 8),
                             padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: AppTheme.textPrimary),
@@ -212,7 +214,6 @@ class OrderPage extends GetView<OrderController> {
                               ],
                             ),
                           ),
-                          const Divider(),
                         ]),
                         itemCount: controller.length(),
                       ),

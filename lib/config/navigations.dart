@@ -8,8 +8,10 @@ import 'package:thirumathikart_seller/bindings/profile_bindings.dart';
 import 'package:thirumathikart_seller/bindings/earning_bindings.dart';
 import 'package:thirumathikart_seller/bindings/order_bindings.dart';
 import 'package:thirumathikart_seller/bindings/product_bindings.dart';
+import 'package:thirumathikart_seller/bindings/map_bindings.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/views/add_edit_product_page.dart';
+import 'package:thirumathikart_seller/views/map_page.dart';
 import 'package:thirumathikart_seller/views/home_page.dart';
 import 'package:thirumathikart_seller/views/login.dart';
 import 'package:thirumathikart_seller/views/past_orders.dart';
@@ -70,6 +72,11 @@ class NavigationPages {
           name: NavigationRoutes.product,
           page: () => const ProductPage(),
           binding: ProductBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.map,
+          page: MapPage.new,
+          binding: MapBindings(),
         ),
       ];
 }

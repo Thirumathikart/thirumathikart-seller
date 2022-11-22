@@ -19,7 +19,8 @@ class ProductPage extends GetView<ProductController> {
               SingleChildScrollView(
                 child: Expanded(
                   child: Obx(
-                    () => SizedBox(
+                    () => Container(
+                      padding: const EdgeInsets.only(bottom: 20),
                       height: MediaQuery.of(context).size.height - 90,
                       child: ListView.builder(
                         itemBuilder: (ctx, index) => Column(children: [
@@ -30,7 +31,8 @@ class ProductPage extends GetView<ProductController> {
                                 ? 190
                                 : ((MediaQuery.of(context).size.height - 60) /
                                     4.3),
-                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            margin: const EdgeInsets.only(
+                                left: 10, right: 10, top: 8, bottom: 8),
                             padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: AppTheme.textPrimary),
@@ -116,7 +118,8 @@ class ProductPage extends GetView<ProductController> {
                                               onPressed: () => {
                                                 controller
                                                     .increaseQtyOfSelectedItem(
-                                                        index)
+                                                        index),
+                                                controller.update()
                                               },
                                               icon: const Icon(
                                                 Icons.add,
@@ -125,7 +128,8 @@ class ProductPage extends GetView<ProductController> {
                                             ),
                                             IconButton(
                                               onPressed: () => {
-                                                controller.deleteItem(index)
+                                                controller.deleteItem(index),
+                                                controller.update()
                                               },
                                               icon: const Icon(
                                                 Icons.delete,
@@ -168,7 +172,6 @@ class ProductPage extends GetView<ProductController> {
                               ],
                             ),
                           ),
-                          const Divider(),
                         ]),
                         itemCount: controller.length(),
                       ),
