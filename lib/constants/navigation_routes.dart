@@ -7,4 +7,5 @@ class NavigationRoutes {
   static String earningRoute = '/earning';
   static String order = '/order';
   static String product = '/product';
+  static String map = '/map';
 }
