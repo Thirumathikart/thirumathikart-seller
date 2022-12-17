@@ -3,13 +3,32 @@ import 'package:get/get.dart';
 import 'package:thirumathikart_seller/controllers/map_controller.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_map_polyline_new/google_map_polyline_new.dart';
 
 class MapPage extends GetView<MapController> {
-  const MapPage({super.key});
+   MapPage({super.key});
   static const theinitialCameraPosition = CameraPosition(
     target: LatLng(10.790433, 78.704562),
     zoom: 12.5,
   );
+  final Set<Polyline> polyline = {};
+  // late List<LatLng>? routeCoords;
+  final GoogleMapPolyline googleMapPolyline =
+ GoogleMapPolyline(apiKey: 'AIzaSyB4i_iNoZguZkAUIB6rBjlRU85g2KkSdj4');
+
+// getsomePoints() async {
+//     var permissions =
+//         await Permission.getPermissionsStatus([PermissionName.Location]);
+//     if (permissions[0].permissionStatus == PermissionStatus.notAgain) {
+//       var askpermissions =
+//           await Permission.requestPermissions([PermissionName.Location]);
+//     } else {
+//       routeCoords = await googleMapPolyline.getCoordinatesWithLocation(
+//           origin: LatLng(40.6782, -73.9442),
+//           destination: LatLng(40.6944, -73.9212),
+//           mode: RouteMode.driving);
+//     }
+//   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -24,9 +43,26 @@ class MapPage extends GetView<MapController> {
               child: Stack(
                 children: [
                   Obx(() => GoogleMap(
-                        onMapCreated: (GoogleMapController mapController) {
+                        onMapCreated:
+                            (GoogleMapController mapController) async {
                           controller.googleMapController = mapController;
+                          
+                        //   routeCoords = await googleMapPolyline
+                        //       .getCoordinatesWithLocation(
+                        //           origin: const LatLng(10.790433, 78.704562),
+                        //           destination:
+                        //               const LatLng(10.768061, 78.813578),
+                        //           mode: RouteMode.driving);
+                        //   polyline.add(Polyline(
+                        //       polylineId: const PolylineId('route1'),
+                        //       visible: true,
+                        //       points: routeCoords!,
+                        //       width: 4,
+                        //       color: Colors.blue,
+                        //       startCap: Cap.roundCap,
+                        //       endCap: Cap.buttCap));
                         },
+                        // polylines: polyline,
                         myLocationButtonEnabled: false,
                         zoomControlsEnabled: false,
                         initialCameraPosition: theinitialCameraPosition,
