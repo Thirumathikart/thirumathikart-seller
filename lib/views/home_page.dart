@@ -54,5 +54,4 @@ class HomePage extends GetView<HomeController> {
           ),
         ],
       ))); //TODO : Need to remove After PR review
-
 }

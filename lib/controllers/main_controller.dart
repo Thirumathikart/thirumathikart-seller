@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class MainController extends GetxController {
   final selectedIndex = 0.obs;
   late PageController pageController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -19,6 +19,6 @@ class HomeController extends GetxController {
 
   void onPageChanged() {
     pageController.animateToPage(selectedIndex.value,
-        duration: const Duration(milliseconds: 300), curve: Curves.bounceIn);
+        duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
   }
 }

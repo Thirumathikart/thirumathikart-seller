@@ -2,6 +2,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:thirumathikart_seller/bindings/home_bindings.dart';
 import 'package:thirumathikart_seller/bindings/login_bindings.dart';
 import 'package:thirumathikart_seller/bindings/add_edit_products_binding.dart';
+import 'package:thirumathikart_seller/bindings/main_binding.dart';
 import 'package:thirumathikart_seller/bindings/past_orders_binding.dart';
 import 'package:thirumathikart_seller/bindings/todays_orders_bindings.dart';
 import 'package:thirumathikart_seller/bindings/profile_bindings.dart';
@@ -14,9 +15,12 @@ import 'package:thirumathikart_seller/views/add_edit_product_page.dart';
 import 'package:thirumathikart_seller/views/map_page.dart';
 import 'package:thirumathikart_seller/views/home_page.dart';
 import 'package:thirumathikart_seller/views/login.dart';
+import 'package:thirumathikart_seller/views/main_page.dart';
 import 'package:thirumathikart_seller/views/past_orders.dart';
 import 'package:thirumathikart_seller/views/todays_orders.dart';
 import 'package:thirumathikart_seller/views/profile.dart';
+import 'package:thirumathikart_seller/views/registration_page.dart';
+import 'package:thirumathikart_seller/views/terms_conditions.dart';
 import 'package:thirumathikart_seller/views/earning.dart';
 import 'package:thirumathikart_seller/views/order_page.dart';
 import 'package:thirumathikart_seller/views/product_page.dart';
@@ -49,9 +53,21 @@ class NavigationPages {
           binding: ProfileBindings(),
         ),
         GetPage(
+          name: NavigationRoutes.main,
+          page: Mainpage.new,
+          binding: MainBindings(),
+        ),
+        GetPage(name: NavigationRoutes.termsconditions, page: Termspage.new),
+        // GetPage(name: NavigationRoutes.termsconditions, page: const Termspage(),)
+
+        GetPage(
           name: NavigationRoutes.earningRoute,
           page: () => const EarningPage(),
           binding: EarningBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.registerRoute,
+          page: () => const RegisterPage(),
         ),
         GetPage(
           name: NavigationRoutes.todaysOrdersRoute,
