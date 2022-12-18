@@ -12,14 +12,14 @@ import 'package:thirumathikart_seller/widgets/utils/app_button.dart';
 
 class AddEditProductPage extends GetView<AddEditProductsController> {
   AddEditProductPage({super.key});
-  final _nameController =
-      TextEditingController(text: '${Get.arguments.name ?? ''}');
-  final _priceController =
-      TextEditingController(text: '${Get.arguments.price ?? ' '}');
-  final _descController =
-      TextEditingController(text: '${Get.arguments.description ?? ' '}');
-  final _quantityController =
-      TextEditingController(text: '${Get.arguments.quantity ?? ' '}');
+  final _nameController = TextEditingController(
+      text: Get.arguments == null ? '' : '${Get.arguments.name ?? ''}');
+  final _priceController = TextEditingController(
+      text: Get.arguments == null ? '' : '${Get.arguments.price ?? ' '}');
+  final _descController = TextEditingController(
+      text: Get.arguments == null ? '' : '${Get.arguments.description ?? ' '}');
+  final _quantityController = TextEditingController(
+      text: Get.arguments == null ? '' : '${Get.arguments.quantity ?? ' '}');
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final String name = Get.routing.current == NavigationRoutes.addProduct
       ? 'Add Product'
@@ -48,65 +48,75 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
         appBar: appBar(name),
         body: SingleChildScrollView(
             child: Form(
-          key: _formkey,
-          child: Column(
-            children: [
-              Obx(() => GestureDetector(
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      width: (MediaQuery.of(context).size.width).toInt() - 100,
-                      height: (MediaQuery.of(context).size.width).toInt() - 100,
-                      child: Container(
-                        decoration: controller.isImageAdded.value
-                            ? const BoxDecoration()
-                            : BoxDecoration(
-                                border: Border.all(color: AppTheme.textPrimary),
-                                borderRadius: BorderRadius.circular(15)),
-                        child: controller.isImageAdded.value
-                            ? Image.file(controller.image.value)
-                            : Get.arguments.imageUrl != null
-                                ? Image.network(Get.arguments.imageUrl)
-                                : const Center(
-                                    child: Text(
-                                        '\t \t \t No Image Added \n Click here to add image'),
-                                  ),
+                key: _formkey,
+                child: Obx(
+                  () => Column(
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          width:
+                              (MediaQuery.of(context).size.width).toInt() - 100,
+                          height:
+                              (MediaQuery.of(context).size.width).toInt() - 100,
+                          child: Container(
+                            decoration: controller.isImageAdded.value
+                                ? const BoxDecoration()
+                                : BoxDecoration(
+                                    border:
+                                        Border.all(color: AppTheme.textPrimary),
+                                    borderRadius: BorderRadius.circular(15)),
+                            child: controller.isImageAdded.value
+                                ? Image.file(controller.image.value)
+                                : Get.arguments != null &&
+                                        Get.arguments.imageUrl != null
+                                    ? Image.network(Get.arguments.imageUrl)
+                                    : const Center(
+                                        child: Text(
+                                            '\t \t \t No Image Added \n Click here to add image'),
+                                      ),
+                          ),
+                        ),
+                        onTap: () {
+                          controller.pickImage();
+                        },
                       ),
-                    ),
-                    onTap: () {
-                      controller.pickImage();
-                    },
-                  )),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 10, left: 0, right: 0, bottom: 0),
-                child: Divider(
-                  color: AppTheme.searchBar,
-                  thickness: 1,
-                  indent: 10,
-                  endIndent: 10,
-                ),
-              ),
-              AddEditProductField(
-                productName: EditProductConstants.name,
-                namecontroller: _nameController,
-              ),
-              AddEditProductField(
-                productName: EditProductConstants.price,
-                namecontroller: _priceController,
-              ),
-              const AddEditProductDropDown(
-                  productName: EditProductConstants.category),
-              AddEditProductField(
-                productName: EditProductConstants.quantity,
-                namecontroller: _descController,
-              ),
-              AddEditProductField(
-                productName: EditProductConstants.description,
-                namecontroller: _quantityController,
-              ),
-              AppButton(buttonName: buttonName, onPressed: _saveForm),
-            ],
-          ),
-        )),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 10, left: 0, right: 0, bottom: 0),
+                        child: Divider(
+                          color: AppTheme.searchBar,
+                          thickness: 1,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+                      ),
+                      AddEditProductField(
+                        productName: EditProductConstants.name,
+                        namecontroller: _nameController,
+                      ),
+                      AddEditProductField(
+                        productName: EditProductConstants.price,
+                        namecontroller: _priceController,
+                      ),
+                      const AddEditProductDropDown(
+                          productName: EditProductConstants.category),
+                      AddEditProductField(
+                        productName: EditProductConstants.quantity,
+                        namecontroller: _quantityController,
+                      ),
+                      AddEditProductField(
+                        productName: EditProductConstants.description,
+                        namecontroller: _descController,
+                      ),
+                      !controller.isLoading.value
+                          ? AppButton(
+                              buttonName: buttonName, onPressed: _saveForm)
+                          : CircularProgressIndicator(
+                              color: AppTheme.deSelected,
+                            ),
+                    ],
+                  ),
+                ))),
       );
 }

@@ -1,14 +1,20 @@
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:thirumathikart_seller/config/navigations.dart';
 import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart';
+import 'package:thirumathikart_seller/constants/navigation_routes.dart';
+import 'package:thirumathikart_seller/models/create_product_request.dart';
 import 'package:thirumathikart_seller/models/product.dart';
+import 'package:thirumathikart_seller/services/api_service.dart';
 
 class AddEditProductsController extends GetxController {
   var product = Product().obs;
   var dropdownvalue = EditProductConstants.categoryItems[0].obs;
   var isImageAdded = false.obs;
+  var isLoading = false.obs;
   var image = File('').obs;
+  final api = Get.find<ApiServices>().api;
   var isChange = {
     EditProductConstants.name: false,
     EditProductConstants.price: false,
@@ -16,13 +22,6 @@ class AddEditProductsController extends GetxController {
     EditProductConstants.description: false,
     EditProductConstants.quantity: false
   }.obs;
-  @override
-  void onInit() {
-    super.onInit();
-    if (Get.arguments.category != null) {
-      dropdownvalue.value = Get.arguments.category!;
-    }
-  }
 
   void updateChange(String constant) {
     isChange[constant] = !isChange[constant]!;
@@ -43,8 +42,32 @@ class AddEditProductsController extends GetxController {
     }
   }
 
-  void updateProduct(Product controllerproduct) {
+  void updateProduct(Product controllerproduct) async {
     product.value = controllerproduct;
-    Get.snackbar('Add/Update Product', 'Product updated Successfully');
+    if (controllerproduct.category != null &&
+        controllerproduct.description != null &&
+        controllerproduct.name != null &&
+        controllerproduct.price != null &&
+        controllerproduct.image != null &&
+        controllerproduct.quantity != null) {
+      CreateProductRequest request = CreateProductRequest(
+          categoryId: 1,
+          sellerId: 1,
+          price: int.parse(controllerproduct.price!),
+          stock: int.parse(controllerproduct.quantity!),
+          title: controllerproduct.name!,
+          description: controllerproduct.description!);
+      isLoading.value = true;
+      api.createProduct(request, controllerproduct.image!).then((value) {
+        isLoading.value = false;
+        Get.snackbar('Add/Update Product', 'Product created successfully');
+        Get.offAndToNamed(NavigationRoutes.home);
+      }, onError: (err) {
+        isLoading.value = false;
+        Get.snackbar('Add/Update Product', 'Unable to create product');
+      });
+    } else {
+      print("hello");
+    }
   }
 }

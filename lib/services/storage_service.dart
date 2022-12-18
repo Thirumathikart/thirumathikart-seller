@@ -11,6 +11,7 @@ class StorageServices extends GetxService {
     return this;
   }
 
+<<<<<<< HEAD
   Future<void> storeUser(String user) async {
     await storage.write(StorageConstants.user, user);
   }
@@ -21,4 +22,10 @@ class StorageServices extends GetxService {
     }
     return storage.read(StorageConstants.user);
   }
+=======
+  void storeJWT(String jwt) async =>
+      await storage.write(StorageConstants.jwt, jwt);
+
+  String? retriveJWT() => storage.read(StorageConstants.jwt);
+>>>>>>> d64f051 (feat(addproducts): add product page)
 }

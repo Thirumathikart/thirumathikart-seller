@@ -45,10 +45,10 @@ class LoginController extends GetxController {
   }
 
   bool userTokenFetch() {
-    if (storage.getUser() == null) {
+    if (storage.retriveJWT() == null) {
       userToken = '';
     } else {
-      userToken = storage.getUser()!;
+      userToken = storage.retriveJWT()!;
     }
     if (userToken == '') {
       return false;

@@ -11,6 +11,14 @@ class ProductPage extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Get.toNamed(NavigationRoutes.addProduct),
+          backgroundColor: AppTheme.bg,
+          child: Icon(
+            Icons.add,
+            color: AppTheme.unSelected,
+          ),
+        ),
         appBar: appBar('Product Page'),
         body: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -43,18 +51,20 @@ class ProductPage extends GetView<ProductController> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  width: 110.0,
-                                  height: 110.0,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(controller
-                                          .productsListDynamic[index].image!),
-                                    ),
-                                  ),
-                                ),
+                                Flexible(
+                                    flex: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(controller
+                                              .productsListDynamic[index]
+                                              .image!),
+                                        ),
+                                      ),
+                                    )),
                                 const SizedBox(width: 10.0),
                                 Expanded(
                                   child: Column(
@@ -96,48 +106,11 @@ class ProductPage extends GetView<ProductController> {
                                         ),
                                         Row(
                                           children: [
-                                            IconButton(
-                                              onPressed: () => {
-                                                controller
-                                                    .decreaseQtyOfSelectedItem(
-                                                        index,
-                                                        controller
-                                                                .productsListDynamic[
-                                                            index])
-                                              },
-                                              icon: const Icon(
-                                                Icons.remove,
-                                                size: 25,
-                                              ),
-                                            ),
+                                            const Text('Stocks Available: '),
                                             Text(controller
                                                 .productsListDynamic[index]
                                                 .quantity
                                                 .toString()),
-                                            IconButton(
-                                              onPressed: () => {
-                                                controller
-                                                    .increaseQtyOfSelectedItem(
-                                                        index),
-                                                controller.update()
-                                              },
-                                              icon: const Icon(
-                                                Icons.add,
-                                                size: 25,
-                                              ),
-                                            ),
-                                            IconButton(
-                                              onPressed: () => {
-                                                controller.deleteItem(index),
-                                                controller.update()
-                                              },
-                                              icon: const Icon(
-                                                Icons.delete,
-                                                color: Color.fromARGB(
-                                                    255, 84, 84, 84),
-                                                size: 25,
-                                              ),
-                                            ),
                                           ],
                                         )
                                       ]),
