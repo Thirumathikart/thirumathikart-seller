@@ -1,16 +1,16 @@
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:thirumathikart_seller/config/navigations.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
+import 'package:thirumathikart_seller/controllers/login_controller.dart';
 import 'package:thirumathikart_seller/services/api_service.dart';
 import 'package:thirumathikart_seller/services/storage_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
+  Get.put(LoginController());
   runApp(const Thirumathikart());
 }
 
@@ -19,8 +19,8 @@ Future<void> initServices() async {
   await Get.putAsync(() => ApiServices().initApi());
 }
 
-class Thirumathikart extends StatelessWidget {
-  const Thirumathikart({Key? key}) : super(key: key);
+class Thirumathikart extends GetView<LoginController> {
+  const Thirumathikart({super.key});
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
@@ -29,7 +29,9 @@ class Thirumathikart extends StatelessWidget {
             textTheme:
                 GoogleFonts.brawlerTextTheme(Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
-        initialRoute: NavigationRoutes.pastOrdersRoute,
+        initialRoute: controller.userTokenFetch()
+            ? NavigationRoutes.profileRoute
+            : NavigationRoutes.loginRoute,
         getPages: NavigationPages.getPages(),
       );
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thirumathikart_seller/config/themes.dart';
-import 'package:thirumathikart_seller/constants/navigation_routes.dart';
+import 'package:thirumathikart_seller/controllers/login_controller.dart';
 
-class LoginButton extends StatelessWidget {
+class LoginButton extends GetView<LoginController> {
   const LoginButton({super.key});
 
   @override
@@ -12,8 +12,7 @@ class LoginButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: MaterialButton(
           onPressed: () {
-            //Get.toNamed(NavigationRoutes.home);
-            Get.toNamed(NavigationRoutes.profileRoute);
+            controller.login();
           },
           color: AppTheme.facebook,
           shape: const RoundedRectangleBorder(
