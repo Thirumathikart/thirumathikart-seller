@@ -7,23 +7,23 @@ class EditProductConstants {
   static const List<String> categoryItems = <String>[
     'Food',
     'Clothing',
-    'Handricrafts',
+    'Handricraft',
     'Grocery',
-    'Fahion and Jewellery',
-    'Beauty and Healthcare',
-    'Office Code',
-    'Organic Fruits & Vegetables',
+    'Fashion-and-Jewellery',
+    'Beauty',
+    'Kitchen-supplies',
+    'Organic',
     'Others'
   ];
   static var categoryMap = {
     'Food': 1,
     'Clothing': 2,
-    'Handricrafts': 3,
+    'Handricraft': 3,
     'Grocery': 4,
-    'Fahion and Jewellery': 5,
-    'Beauty and Healthcare': 6,
-    'Office Code': 7,
-    'Organic Fruits & Vegetables': 8,
+    'Fashion-and-Jewellery': 5,
+    'Beauty': 6,
+    'Kitchen-supplies': 7,
+    'Organic': 8,
     'Others': 9
   };
 }

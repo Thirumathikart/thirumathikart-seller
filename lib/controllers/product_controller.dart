@@ -1,10 +1,16 @@
+import 'package:thirumathikart_seller/models/product_response.dart';
 import 'package:thirumathikart_seller/models/producttwo.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:thirumathikart_seller/services/api_service.dart';
+import 'package:thirumathikart_seller/services/storage_service.dart';
 
-class ProductController extends GetxController {
+class ProductController extends GetxController
+    with StateMixin<List<ProductResponse>> {
   //
   //Remove after Adding Backend functionality
+  final api = Get.find<ApiServices>().api;
+  final storage = Get.find<StorageServices>();
   List<ProductTwo> productsList = [
     ProductTwo(
       id: 101,
@@ -107,11 +113,19 @@ class ProductController extends GetxController {
       quantity: 10,
     ),
   ];
-
   //
   final textController = TextEditingController();
   final productsListDynamic = [].obs;
   final isSelected = [true, false].obs;
+
+  Future<void> getProductsBySeller() async {
+    api.getProductsForSeller(storage, 'seller').then((response) {
+      change(response, status: RxStatus.success());
+    }, onError: (err) {
+      change(null, status: RxStatus.error(err.toString()));
+      Get.snackbar('Failed To Get Products', 'Check Your Internet Connection');
+    });
+  }
 
   void increaseQtyOfSelectedItem(int index) {
     productsListDynamic[index].quantity =
@@ -147,7 +161,7 @@ class ProductController extends GetxController {
 
   @override
   void onReady() {
-    productsListDynamic(productsList);
+    getProductsBySeller();
     super.onReady();
   }
 }

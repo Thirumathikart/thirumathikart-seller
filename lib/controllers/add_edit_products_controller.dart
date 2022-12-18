@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
+import 'package:thirumathikart_seller/controllers/product_controller.dart';
 import 'package:thirumathikart_seller/models/create_product_request.dart';
 import 'package:thirumathikart_seller/models/product.dart';
 import 'package:thirumathikart_seller/models/update_product_request.dart';
@@ -17,6 +18,7 @@ class AddEditProductsController extends GetxController {
   var image = File('').obs;
   final api = Get.find<ApiServices>().api;
   final storage = Get.find<StorageServices>();
+  final productController = Get.find<ProductController>();
   var isChange = {
     EditProductConstants.name: false,
     EditProductConstants.price: false,
@@ -64,6 +66,7 @@ class AddEditProductsController extends GetxController {
         api.createProduct(request, controllerproduct.image!, storage).then(
             (value) {
           isLoading.value = false;
+          productController.getProductsBySeller();
           Get.snackbar('Add Product', 'Product created successfully');
           Get.offAndToNamed(NavigationRoutes.home);
         }, onError: (err) {
@@ -82,6 +85,7 @@ class AddEditProductsController extends GetxController {
         api.updateProduct(request, controllerproduct.image!, storage).then(
             (value) {
           isLoading.value = false;
+          productController.getProductsBySeller();
           Get.snackbar('Update Product', 'Product updated successfully');
           Get.offAndToNamed(NavigationRoutes.home);
         }, onError: (err) {
