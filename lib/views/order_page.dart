@@ -87,11 +87,10 @@ class OrderPage extends GetView<OrderController> {
                   child: Obx(
                     () => Container(
                       height: MediaQuery.of(context).size.height - 150,
-                      padding: const EdgeInsets.only(bottom: 20),
+                      padding: const EdgeInsets.only(bottom: 60),
                       child: ListView.builder(
                         itemBuilder: (ctx, index) => Column(children: [
                           Container(
-                            height: 200.0,
                             margin: const EdgeInsets.only(
                                 left: 10, right: 10, top: 8, bottom: 8),
                             padding: const EdgeInsets.all(10.0),

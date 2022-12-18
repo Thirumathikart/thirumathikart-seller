@@ -10,4 +10,5 @@ class ApiConstants {
   static String getProductPrice = '$orderBaseUrl/get_product_details';
   static String updateTitle = '$orderBaseUrl/update_product_title';
   static String updateDescription = '$orderBaseUrl/update_product_description';
+  static String updateProduct = '$orderBaseUrl/update_product';
 }

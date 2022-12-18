@@ -5,6 +5,7 @@ import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart'
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/models/create_product_request.dart';
 import 'package:thirumathikart_seller/models/product.dart';
+import 'package:thirumathikart_seller/models/update_product_request.dart';
 import 'package:thirumathikart_seller/services/api_service.dart';
 import 'package:thirumathikart_seller/services/storage_service.dart';
 
@@ -51,23 +52,43 @@ class AddEditProductsController extends GetxController {
         controllerproduct.price != null &&
         controllerproduct.image != null &&
         controllerproduct.quantity != null) {
-      CreateProductRequest request = CreateProductRequest(
-          categoryId: EditProductConstants.categoryMap[controllerproduct.category]!,
-          price: int.parse(controllerproduct.price!),
-          stock: int.parse(controllerproduct.quantity!),
-          title: controllerproduct.name!,
-          description: controllerproduct.description!);
       isLoading.value = true;
-      api.createProduct(request, controllerproduct.image!,storage).then((value) {
-        isLoading.value = false;
-        Get.snackbar('Add/Update Product', 'Product created successfully');
-        Get.offAndToNamed(NavigationRoutes.home);
-      }, onError: (err) {
-        isLoading.value = false;
-        Get.snackbar('Add/Update Product', 'Unable to create product');
-      });
-    } else {
-      print("hello");
-    }
+      if (Get.currentRoute == NavigationRoutes.addProduct) {
+        CreateProductRequest request = CreateProductRequest(
+            categoryId:
+                EditProductConstants.categoryMap[controllerproduct.category]!,
+            price: int.parse(controllerproduct.price!),
+            stock: int.parse(controllerproduct.quantity!),
+            title: controllerproduct.name!,
+            description: controllerproduct.description!);
+        api.createProduct(request, controllerproduct.image!, storage).then(
+            (value) {
+          isLoading.value = false;
+          Get.snackbar('Add Product', 'Product created successfully');
+          Get.offAndToNamed(NavigationRoutes.home);
+        }, onError: (err) {
+          isLoading.value = false;
+          Get.snackbar('Add Product', 'Unable to create product');
+        });
+      } else {
+        UpdateProductRequest request = UpdateProductRequest(
+            id: 1,
+            categoryId:
+                EditProductConstants.categoryMap[controllerproduct.category]!,
+            price: int.parse(controllerproduct.price!),
+            stock: int.parse(controllerproduct.quantity!),
+            title: controllerproduct.name!,
+            description: controllerproduct.description!);
+        api.updateProduct(request, controllerproduct.image!, storage).then(
+            (value) {
+          isLoading.value = false;
+          Get.snackbar('Update Product', 'Product updated successfully');
+          Get.offAndToNamed(NavigationRoutes.home);
+        }, onError: (err) {
+          isLoading.value = false;
+          Get.snackbar('Update Product', 'Unable to update product');
+        });
+      }
+    } else {}
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:thirumathikart_seller/config/themes.dart';
 
 PreferredSizeWidget appBar(String label) => AppBar(
@@ -13,4 +14,11 @@ PreferredSizeWidget appBar(String label) => AppBar(
             fontSize: 25),
       ),
       centerTitle: true,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        // Status bar color
+        statusBarColor: Colors.transparent,
+        // Status bar brightness (optional)
+        statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        statusBarBrightness: Brightness.light, // For iOS (dark icons)
+      ),
     );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thirumathikart_seller/config/themes.dart';
-import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/constants/screen_constants.dart';
 import 'package:thirumathikart_seller/controllers/home_controller.dart';
 

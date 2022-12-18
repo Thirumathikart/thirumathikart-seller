@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
@@ -20,9 +19,9 @@ class SplashController extends GetxController {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       splashTimer = Timer(const Duration(milliseconds: 3000), () {
         String? token = storage.retriveJWT();
-        String route = NavigationRoutes.loginRoute;
+        String route = NavigationRoutes.home;
         if (token == null) {
-          route = NavigationRoutes.home;
+          route = NavigationRoutes.loginRoute;
         }
         Get.offAndToNamed(route);
       });
