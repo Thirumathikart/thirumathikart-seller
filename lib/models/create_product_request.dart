@@ -9,7 +9,6 @@ String createProductRequestToJson(CreateProductRequest data) =>
 class CreateProductRequest {
   CreateProductRequest({
     required this.categoryId,
-    required this.sellerId,
     required this.price,
     required this.stock,
     required this.title,
@@ -17,7 +16,6 @@ class CreateProductRequest {
   });
 
   final int categoryId;
-  final int sellerId;
   final int price;
   final int stock;
   final String title;
@@ -26,7 +24,6 @@ class CreateProductRequest {
   factory CreateProductRequest.fromJson(Map<String, dynamic> json) =>
       CreateProductRequest(
         categoryId: json['category_id'],
-        sellerId: json['seller_id'],
         price: json['price'],
         stock: json['stock'],
         title: json['title'],
@@ -35,7 +32,6 @@ class CreateProductRequest {
 
   Map<String, dynamic> toJson() => {
         'category_id': categoryId,
-        'seller_id': sellerId,
         'price': price,
         'stock': stock,
         'title': title,

@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:thirumathikart_seller/config/navigations.dart';
 import 'package:thirumathikart_seller/constants/add_edit_product_constants.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/models/create_product_request.dart';
 import 'package:thirumathikart_seller/models/product.dart';
 import 'package:thirumathikart_seller/services/api_service.dart';
+import 'package:thirumathikart_seller/services/storage_service.dart';
 
 class AddEditProductsController extends GetxController {
   var product = Product().obs;
@@ -15,6 +15,7 @@ class AddEditProductsController extends GetxController {
   var isLoading = false.obs;
   var image = File('').obs;
   final api = Get.find<ApiServices>().api;
+  final storage = Get.find<StorageServices>();
   var isChange = {
     EditProductConstants.name: false,
     EditProductConstants.price: false,
@@ -51,14 +52,13 @@ class AddEditProductsController extends GetxController {
         controllerproduct.image != null &&
         controllerproduct.quantity != null) {
       CreateProductRequest request = CreateProductRequest(
-          categoryId: 1,
-          sellerId: 1,
+          categoryId: EditProductConstants.categoryMap[controllerproduct.category]!,
           price: int.parse(controllerproduct.price!),
           stock: int.parse(controllerproduct.quantity!),
           title: controllerproduct.name!,
           description: controllerproduct.description!);
       isLoading.value = true;
-      api.createProduct(request, controllerproduct.image!).then((value) {
+      api.createProduct(request, controllerproduct.image!,storage).then((value) {
         isLoading.value = false;
         Get.snackbar('Add/Update Product', 'Product created successfully');
         Get.offAndToNamed(NavigationRoutes.home);

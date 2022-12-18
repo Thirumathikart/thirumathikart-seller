@@ -7,7 +7,6 @@ import 'package:thirumathikart_seller/models/login_request.dart';
 import 'package:thirumathikart_seller/models/login_response.dart';
 import 'package:thirumathikart_seller/services/storage_service.dart';
 
-import 'package:thirumathikart_seller/constants/api_constants.dart';
 import 'package:thirumathikart_seller/models/create_product_request.dart';
 
 class ApiServices extends GetxService {
@@ -56,6 +55,7 @@ class ApiManager extends GetConnect {
   Future<String> createProduct(
     CreateProductRequest request,
     File file,
+    StorageServices storageServices
   ) async {
     try {
       final GetConnect _connect = GetConnect(
@@ -63,24 +63,23 @@ class ApiManager extends GetConnect {
         // you can use another value if you like
         timeout: const Duration(seconds: 100),
       );
+      var jwt=storageServices.retriveJWT();
+      var headers = {
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': jwt!
+    };
       FormData formData = FormData(request.toJson());
       formData.files.add(
           MapEntry('files', MultipartFile(file, filename: 'products.jpg')));
-      var headers = {
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      };
-      print(ApiConstants.createProduct);
       final response =
           await _connect.post(ApiConstants.createProduct, formData);
-      print(response.statusText.toString());
       if (response.status.hasError) {
         return Future.error(response.statusText!);
       } else {
         if (response.statusCode == 200) {
           return 'success';
         }
-        print(response.bodyString);
         return Future.error(response.statusText.toString());
       }
     } catch (e) {
