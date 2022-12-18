@@ -3,17 +3,27 @@ import 'package:thirumathikart_seller/bindings/home_bindings.dart';
 import 'package:thirumathikart_seller/bindings/login_bindings.dart';
 import 'package:thirumathikart_seller/bindings/add_edit_products_binding.dart';
 import 'package:thirumathikart_seller/bindings/main_binding.dart';
+import 'package:thirumathikart_seller/bindings/past_orders_binding.dart';
+import 'package:thirumathikart_seller/bindings/todays_orders_bindings.dart';
 import 'package:thirumathikart_seller/bindings/profile_bindings.dart';
 import 'package:thirumathikart_seller/bindings/earning_bindings.dart';
+import 'package:thirumathikart_seller/bindings/order_bindings.dart';
+import 'package:thirumathikart_seller/bindings/product_bindings.dart';
+import 'package:thirumathikart_seller/bindings/map_bindings.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/views/add_edit_product_page.dart';
+import 'package:thirumathikart_seller/views/map_page.dart';
 import 'package:thirumathikart_seller/views/home_page.dart';
 import 'package:thirumathikart_seller/views/login.dart';
 import 'package:thirumathikart_seller/views/main_page.dart';
+import 'package:thirumathikart_seller/views/past_orders.dart';
+import 'package:thirumathikart_seller/views/todays_orders.dart';
 import 'package:thirumathikart_seller/views/profile.dart';
 import 'package:thirumathikart_seller/views/registration_page.dart';
 import 'package:thirumathikart_seller/views/terms_conditions.dart';
 import 'package:thirumathikart_seller/views/earning.dart';
+import 'package:thirumathikart_seller/views/order_page.dart';
+import 'package:thirumathikart_seller/views/product_page.dart';
 
 class NavigationPages {
   static List<GetPage<dynamic>> getPages() => [
@@ -58,6 +68,30 @@ class NavigationPages {
         GetPage(
           name: NavigationRoutes.registerRoute,
           page: () => const RegisterPage(),
+          name: NavigationRoutes.todaysOrdersRoute,
+          page: () => const TodaysOrdersPage(),
+          binding: TodaysOrdersBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.pastOrdersRoute,
+          page: () => const PastOrdersPage(),
+          binding: PastOrdersBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.order,
+          page: () => const OrderPage(),
+          binding: OrderBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.product,
+          page: () => const ProductPage(),
+          binding: ProductBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.map,
+          page: MapPage.new,
+          binding: MapBindings(),
+
         ),
       ];
 }
