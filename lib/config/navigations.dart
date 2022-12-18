@@ -91,7 +91,6 @@ class NavigationPages {
           name: NavigationRoutes.map,
           page: MapPage.new,
           binding: MapBindings(),
-
         ),
       ];
 }
