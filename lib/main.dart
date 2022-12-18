@@ -30,7 +30,6 @@ class Thirumathikart extends StatelessWidget {
                 GoogleFonts.brawlerTextTheme(Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
         initialRoute: NavigationRoutes.registerRoute,
-        initialRoute: NavigationRoutes.pastOrdersRoute,
         getPages: NavigationPages.getPages(),
       );
 }

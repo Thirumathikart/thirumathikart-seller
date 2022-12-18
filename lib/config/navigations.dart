@@ -68,6 +68,8 @@ class NavigationPages {
         GetPage(
           name: NavigationRoutes.registerRoute,
           page: () => const RegisterPage(),
+        ),
+        GetPage(
           name: NavigationRoutes.todaysOrdersRoute,
           page: () => const TodaysOrdersPage(),
           binding: TodaysOrdersBindings(),
