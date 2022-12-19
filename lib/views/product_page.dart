@@ -42,12 +42,19 @@ class ProductPage extends GetView<ProductController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Flexible(
-                        flex: 1,
+                    Container(
+                      height: 190 > ((MediaQuery.of(context).size.height - 60) / 4.3)
+                    ? 190-50
+                    : ((MediaQuery.of(context).size.height - 60) / 4.3) -50,
+                        width: 190 > ((MediaQuery.of(context).size.height - 60) / 4.3)
+                    ? 190-50
+                    : ((MediaQuery.of(context).size.height - 60) / 4.3) -50,
                         child: ClipRRect(
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10.0),
-                                topRight: Radius.circular(10.0)),
+                                topRight: Radius.circular(10.0),
+                                bottomLeft: Radius.circular(10.0),
+                                bottomRight: Radius.circular(10.0)),
                             child: CachedNetworkImage(
                               fit: BoxFit.fill,
                               imageUrl:
