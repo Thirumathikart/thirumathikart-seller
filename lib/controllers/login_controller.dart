@@ -34,7 +34,7 @@ class LoginController extends GetxController {
 
   void navigateToHome() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.offAndToNamed(NavigationRoutes.profileRoute);
+      Get.offNamed(NavigationRoutes.home);
     });
   }
 
