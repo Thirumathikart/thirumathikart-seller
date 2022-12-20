@@ -42,13 +42,21 @@ class ProductPage extends GetView<ProductController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 190 > ((MediaQuery.of(context).size.height - 60) / 4.3)
-                    ? 190-50
-                    : ((MediaQuery.of(context).size.height - 60) / 4.3) -50,
-                        width: 190 > ((MediaQuery.of(context).size.height - 60) / 4.3)
-                    ? 190-50
-                    : ((MediaQuery.of(context).size.height - 60) / 4.3) -50,
+                    SizedBox(
+                        height: 190 >
+                                ((MediaQuery.of(context).size.height - 60) /
+                                    4.3)
+                            ? 190 - 50
+                            : ((MediaQuery.of(context).size.height - 60) /
+                                    4.3) -
+                                50,
+                        width: 190 >
+                                ((MediaQuery.of(context).size.height - 60) /
+                                    4.3)
+                            ? 190 - 50
+                            : ((MediaQuery.of(context).size.height - 60) /
+                                    4.3) -
+                                50,
                         child: ClipRRect(
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10.0),
@@ -76,6 +84,8 @@ class ProductPage extends GetView<ProductController> {
                               padding: const EdgeInsets.only(bottom: 10),
                               child: Text(
                                 '${state[index].product!.title}',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16.0),
@@ -91,12 +101,15 @@ class ProductPage extends GetView<ProductController> {
                               padding: const EdgeInsets.only(bottom: 10),
                               child: Text(
                                 '${state[index].product!.description}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10),
                               child: Text(
-                                '${state[index].product!.title}',
+                                EditProductConstants.categoryItems[
+                                    state[index].product!.categoryId! - 1],
                               ),
                             ),
                             Row(
