@@ -161,7 +161,7 @@ class OrdersController extends GetxController
         ));
       }
     }, onError: (err) {
-      Get.snackbar('Failed To Fetch Order', err.toString());
+      Get.snackbar('Failure', 'No Orders made yet');
     });
     // final response;
     // order.value = [
