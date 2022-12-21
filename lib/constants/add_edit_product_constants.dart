@@ -7,7 +7,7 @@ class EditProductConstants {
   static const List<String> categoryItems = <String>[
     'Food',
     'Clothing',
-    'Handricraft',
+    'Handicraft',
     'Grocery',
     'Fashion-and-Jewellery',
     'Beauty',
@@ -18,7 +18,7 @@ class EditProductConstants {
   static var categoryMap = {
     'Food': 1,
     'Clothing': 2,
-    'Handricraft': 3,
+    'Handicraft': 3,
     'Grocery': 4,
     'Fashion-and-Jewellery': 5,
     'Beauty': 6,
