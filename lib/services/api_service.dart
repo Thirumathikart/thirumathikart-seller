@@ -5,9 +5,11 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:thirumathikart_seller/constants/api_constants.dart';
 import 'package:thirumathikart_seller/models/accept_order_request.dart';
 import 'package:thirumathikart_seller/models/accept_order_response.dart';
+import 'package:thirumathikart_seller/models/fetch_order_response.dart';
 import 'package:thirumathikart_seller/models/login_request.dart';
 import 'package:thirumathikart_seller/models/login_response.dart';
 import 'package:thirumathikart_seller/models/product_response.dart';
+import 'package:thirumathikart_seller/models/ship_order_request.dart';
 import 'package:thirumathikart_seller/models/update_product_request.dart';
 import 'package:thirumathikart_seller/services/storage_service.dart';
 
@@ -161,8 +163,8 @@ class ApiManager extends GetConnect {
         'Access-Control-Allow-Origin': '*',
         'Authorization': jwt!
       };
-      final response =
-          await post(ApiConstants.acceptOrder, request.toJson(), headers: headers);
+      final response = await post(ApiConstants.acceptOrder, request.toJson(),
+          headers: headers);
       if (response.status.hasError) {
         return Future.error(response.statusText!);
       } else {
@@ -174,6 +176,59 @@ class ApiManager extends GetConnect {
           }
         }
         return Future.error('Unable To update Order');
+      }
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<AcceptOrderResponse> updateOrderOnShip(
+      ShipOrderRequest request, StorageServices storageServices) async {
+    try {
+      var jwt = storageServices.retriveJWT();
+      var headers = {
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': jwt!
+      };
+      final response = await post(ApiConstants.shipOrder, request.toJson(),
+          headers: headers);
+      if (response.status.hasError) {
+        return Future.error(response.statusText!);
+      } else {
+        if (response.statusCode == 200 && response.bodyString != null) {
+          var acceptorderResponse =
+              acceptOrderResponseFromJson(response.bodyString!);
+          if (acceptorderResponse.response == 'Order Placed Successfully') {
+            return acceptorderResponse;
+          }
+        }
+        return Future.error('Unable To Ship Order');
+      }
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<List<FetchOrderResponse>> fetchOrder(
+      StorageServices storageServices) async {
+    try {
+      var jwt = storageServices.retriveJWT();
+      var headers = {
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': jwt!
+      };
+      final response = await get(ApiConstants.fetchOrder, headers: headers);
+      if (response.status.hasError) {
+        return Future.error(response.statusText!);
+      } else {
+        if (response.statusCode == 200 && response.bodyString != null) {
+          var fetchOrderResponses =
+              fetchOrderResponsesFromJson(response.bodyString!);
+          return fetchOrderResponses.fetchOrderResponse!;
+        }
+        return Future.error('Unable To Fetch Order');
       }
     } catch (e) {
       return Future.error(e);

@@ -14,5 +14,6 @@ class ApiConstants {
   static String updateProduct = '$orderBaseUrl/update_product';
   static String sellerProducts = '$orderBaseUrl/get_seller_product';
   static String acceptOrder = '$orderUrl/accept_order';
-
+  static String fetchOrder = '$orderUrl/fetch_by_seller';
+  static String shipOrder = '$orderUrl/ship_order';
 }

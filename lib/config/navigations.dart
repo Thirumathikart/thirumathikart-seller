@@ -2,11 +2,16 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:thirumathikart_seller/bindings/home_bindings.dart';
 import 'package:thirumathikart_seller/bindings/login_bindings.dart';
 import 'package:thirumathikart_seller/bindings/add_edit_products_binding.dart';
+import 'package:thirumathikart_seller/bindings/orders_bindings.dart';
+import 'package:thirumathikart_seller/bindings/orders_details_bindings.dart';
 import 'package:thirumathikart_seller/bindings/splash_binding.dart';
 import 'package:thirumathikart_seller/constants/navigation_routes.dart';
+import 'package:thirumathikart_seller/models/orders.dart';
 import 'package:thirumathikart_seller/views/add_edit_product_page.dart';
 import 'package:thirumathikart_seller/views/home_page.dart';
 import 'package:thirumathikart_seller/views/login.dart';
+import 'package:thirumathikart_seller/views/orders_details_page.dart';
+import 'package:thirumathikart_seller/views/orders_page.dart';
 import 'package:thirumathikart_seller/views/splash.dart';
 
 class NavigationPages {
@@ -71,5 +76,16 @@ class NavigationPages {
         //   page: MapPage.new,
         //   binding: MapBindings(),
         // ),
+        GetPage(
+          name: NavigationRoutes.myOrdersDetailsRoute,
+          page: () => const OrdersDetailsPage(),
+          arguments: List<OrderItemDisplay>,
+          binding: OrdersDetailsBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.myOrdersRoute,
+          page: () => const OrdersPage(),
+          binding: OrdersBindings(),
+        ),
       ];
 }

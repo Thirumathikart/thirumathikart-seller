@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thirumathikart_seller/views/order_page.dart';
+import 'package:thirumathikart_seller/views/orders_page.dart';
 import 'package:thirumathikart_seller/views/product_page.dart';
 import 'package:thirumathikart_seller/views/profile.dart';
 
@@ -13,7 +13,7 @@ class ScreenContants {
   var widgetItems = const [
     ProductPage(),
     ProfilePage(),
-    OrderPage(),
+    OrdersPage(),
   ];
 
   var navItems = const [
@@ -30,7 +30,7 @@ class ScreenContants {
     {
       'title': 'Orders',
       'icon': Icon(Icons.shopping_cart_outlined),
-      'widget': OrderPage(),
+      'widget': OrdersPage(),
     },
   ];
 }
