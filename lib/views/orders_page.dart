@@ -310,7 +310,7 @@ class OrdersPage extends GetView<OrdersController> {
                               visible:
                                   controller.order[index].status == 'AGREED',
                               child: ElevatedButton(
-                                child: const Text('Ship'),
+                                child: const Text('Deliver'),
                                 onPressed: () => {
                                   controller.updateOrderOnShip(ShipOrderRequest(
                                       orderId: controller.order[index].id))

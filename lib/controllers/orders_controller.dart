@@ -112,7 +112,7 @@ class OrdersController extends GetxController
   ];
   void updateOrderOnAccept(AcceptOrderRequest acceptOrderRequest) async {
     api.updateOrderOnAccept(acceptOrderRequest, storageService).then((value) {
-      Get.snackbar('Update Order', 'Order Updated Successfully');
+      Get.snackbar('Update Order', 'Order accepted Successfully');
       fetchOrder();
     }).onError((error, stackTrace) {
       Get.snackbar('Update Order', 'Order Update Failed');
@@ -121,7 +121,7 @@ class OrdersController extends GetxController
 
   void updateOrderOnShip(ShipOrderRequest shipOrderRequest) async {
     api.updateOrderOnShip(shipOrderRequest, storageService).then((value) {
-      Get.snackbar('Update Order', 'Order Updated Successfully');
+      Get.snackbar('Update Order', 'Order Delivered Successfully');
       fetchOrder();
     }).onError((error, stackTrace) {
       Get.snackbar('Update Order', 'Order Update Failed');
@@ -131,7 +131,6 @@ class OrdersController extends GetxController
   void fetchOrder() async {
     await api.fetchOrder(storageService).then((response) {
       order.value = [];
-      Get.snackbar('Order Fetched', 'Order Fetched Successfully.');
       for (int i = 0; i < response.length; i++) {
         var total = 0;
         final orderItems = <OrderItemDisplay>[];
