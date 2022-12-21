@@ -136,6 +136,7 @@ class ProductPage extends GetView<ProductController> {
                             onPressed: () => {
                               Get.toNamed(NavigationRoutes.editProduct,
                                   arguments: Product(
+                                    id: state[index].productId!,
                                     name: state[index].product!.title,
                                     price:
                                         state[index].product!.price.toString(),

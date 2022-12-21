@@ -30,6 +30,7 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
   void _saveForm() {
     if (_formkey.currentState!.validate()) {
       var product = Product(
+        id: Get.arguments.id,
         name: _nameController.text,
         price: _priceController.text,
         category: controller.dropdownvalue.value,

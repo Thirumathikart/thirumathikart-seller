@@ -74,8 +74,9 @@ class AddEditProductsController extends GetxController {
           Get.snackbar('Add Product', 'Unable to create product');
         });
       } else {
+        print(controllerproduct.image!.path.toString());
         UpdateProductRequest request = UpdateProductRequest(
-            id: 1,
+            id: controllerproduct.id!,
             categoryId:
                 EditProductConstants.categoryMap[controllerproduct.category]!,
             price: int.parse(controllerproduct.price!),

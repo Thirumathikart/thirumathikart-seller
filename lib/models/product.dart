@@ -1,6 +1,7 @@
 import 'dart:io';
 
 class Product {
+  int? id;
   String? name;
   String? price;
   String? category;
@@ -9,7 +10,8 @@ class Product {
   File? image;
   String? imageUrl;
   Product(
-      {this.name,
+      {this.id,
+      this.name,
       this.price,
       this.category,
       this.description,

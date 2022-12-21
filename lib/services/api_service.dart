@@ -90,7 +90,7 @@ class ApiManager extends GetConnect {
       final GetConnect connect = GetConnect(
         // the request will fail if it takes more than 10 seconds
         // you can use another value if you like
-        timeout: const Duration(seconds: 100),
+        timeout: const Duration(seconds: 10),
       );
       var jwt = storageServices.retriveJWT();
       var headers = {
@@ -122,7 +122,7 @@ class ApiManager extends GetConnect {
       final GetConnect connect = GetConnect(
         // the request will fail if it takes more than 10 seconds
         // you can use another value if you like
-        timeout: const Duration(seconds: 100),
+        timeout: const Duration(seconds: 10),
       );
       var jwt = storageServices.retriveJWT();
       var headers = {
@@ -131,9 +131,10 @@ class ApiManager extends GetConnect {
         'Authorization': jwt!
       };
       FormData formData = FormData(request.toJson());
-
-      formData.files.add(
-          MapEntry('files', MultipartFile(file, filename: 'products.jpg')));
+      if (file.path != '') {
+        formData.files.add(
+            MapEntry('files', MultipartFile(file, filename: 'products.jpg')));
+      }
       final response = await connect.post(ApiConstants.updateProduct, formData,
           headers: headers);
       if (response.status.hasError) {
