@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:thirumathikart_seller/models/accept_order_request.dart';
+import 'package:thirumathikart_seller/models/accept_order_response.dart';
 import 'package:thirumathikart_seller/models/order.dart';
+import 'package:thirumathikart_seller/services/api_service.dart';
+import 'package:thirumathikart_seller/services/storage_service.dart';
 
-class OrderController extends GetxController {
+class OrderController extends GetxController
+    with StateMixin<AcceptOrderResponse> {
   final textController = TextEditingController();
   final ordersListDynamic = [].obs;
   final isSelected = [true, false].obs;
-  //
+  final api = Get.find<ApiServices>().api;
+  final storageService = Get.find<StorageServices>();
   //Remove after Adding Backend functionality
   List<Order> ordersList = [
     Order(
@@ -100,7 +106,16 @@ class OrderController extends GetxController {
       pickup: '',
     ),
   ];
-  //
+  Future<void> updateOrder(AcceptOrderRequest acceptOrderRequest) async {
+    api.updateOrderOnAccept(acceptOrderRequest, storageService).then((value) {
+      change(value, status: RxStatus.success());
+      Get.snackbar('Update Order', 'Order Updated Successfully');
+    }).onError((error, stackTrace) {
+      change(null, status: RxStatus.error());
+      Get.snackbar('Update Order', 'Order Update Failed');
+    });
+  }
+
   void setOrderType(String type, int index) {
     ordersListDynamic[index].pickup = type;
   }
@@ -126,6 +141,9 @@ class OrderController extends GetxController {
   @override
   void onReady() {
     ordersListDynamic(ordersList);
+    updateOrder(AcceptOrderRequest(
+      orderId: 1,
+    ));
     super.onReady();
   }
 }

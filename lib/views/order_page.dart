@@ -138,52 +138,12 @@ class OrderPage extends GetView<OrderController> {
                                         const Text(
                                           'Order ready for pickup?',
                                         ),
-                                        Obx(
-                                          () => SizedBox(
-                                            height: 30,
-                                            width: 120,
-                                            child: RadioListTile(
-                                                title: const Text('Yes'),
-                                                dense: true,
-                                                value: 'yes',
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30)),
-                                                groupValue: (controller
-                                                        .ordersListDynamic[
-                                                            index]
-                                                        .pickup)
-                                                    .toString(),
-                                                onChanged: (value) {
-                                                  controller.setOrderType(
-                                                      value!, index);
-                                                }),
-                                          ),
+                                        controller.obx(
+                                          (state) =>
+                                            Text(state!.response!),
+                                          
                                         ),
-                                        Obx(
-                                          () => SizedBox(
-                                            height: 30,
-                                            width: 120,
-                                            child: RadioListTile(
-                                                title: const Text('No'),
-                                                dense: true,
-                                                value: 'no',
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30)),
-                                                groupValue: (controller
-                                                        .ordersListDynamic[
-                                                            index]
-                                                        .pickup)
-                                                    .toString(),
-                                                onChanged: (value) {
-                                                  controller.setOrderType(
-                                                      value!, index);
-                                                }),
-                                          ),
-                                        ),
+                                        
                                         const SizedBox(height: 10.0),
                                       ]),
                                 ),
@@ -223,5 +183,6 @@ class OrderPage extends GetView<OrderController> {
             ],
           ),
         ),
+        
       );
 }

@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:get/get_connect/connect.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:thirumathikart_seller/constants/api_constants.dart';
+import 'package:thirumathikart_seller/models/accept_order_request.dart';
+import 'package:thirumathikart_seller/models/accept_order_response.dart';
 import 'package:thirumathikart_seller/models/login_request.dart';
 import 'package:thirumathikart_seller/models/login_response.dart';
 import 'package:thirumathikart_seller/models/product_response.dart';
@@ -144,6 +146,34 @@ class ApiManager extends GetConnect {
           return 'success';
         }
         return Future.error(response.statusText.toString());
+      }
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<AcceptOrderResponse> updateOrderOnAccept(
+      AcceptOrderRequest request, StorageServices storageServices) async {
+    try {
+      var jwt = storageServices.retriveJWT();
+      var headers = {
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Authorization': jwt!
+      };
+      final response =
+          await post(ApiConstants.acceptOrder, request.toJson(), headers: headers);
+      if (response.status.hasError) {
+        return Future.error(response.statusText!);
+      } else {
+        if (response.statusCode == 200 && response.bodyString != null) {
+          var acceptorderResponse =
+              acceptOrderResponseFromJson(response.bodyString!);
+          if (acceptorderResponse.response == 'Order Updated Successfully') {
+            return acceptorderResponse;
+          }
+        }
+        return Future.error('Unable To update Order');
       }
     } catch (e) {
       return Future.error(e);
