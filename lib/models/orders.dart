@@ -13,11 +13,12 @@
 
 class OrderDisplay {
   String? status;
-  int? id, totalAmount, customerAddress, sellerAddress;
+  int? id, totalAmount;String? customerAddress, sellerAddress,customerName;
   List<OrderItemDisplay>? orderItemsList;
 
   OrderDisplay({
     this.id,
+    this.customerName,
     this.status,
     this.totalAmount,
     this.orderItemsList,

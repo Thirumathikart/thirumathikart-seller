@@ -143,19 +143,21 @@ class OrdersController extends GetxController
             description: response.response![i].items![j].description,
             price: response.response![i].items![j].price,
             quantity: response.response![i].items![j].quantity,
-            totalPrice:
-                response.response![i].items![j].price! * response.response![i].items![j].quantity!,
+            totalPrice: response.response![i].items![j].price! *
+                response.response![i].items![j].quantity!,
           ));
-          total +=
-              response.response![i].items![j].price! * response.response![i].items![j].quantity!;
+          total += response.response![i].items![j].price! *
+              response.response![i].items![j].quantity!;
         }
         order.add(OrderDisplay(
           id: response.response![i].order!.id,
           status: response.response![i].order!.orderStatus,
           totalAmount: total,
           orderItemsList: orderItems,
-          customerAddress: response.response![i].order!.customerAddressId,
-          sellerAddress: response.response![i].order!.sellerAddressId,
+          customerName:
+              '${response.response![i].customer!.firstName} ${response.response![i].customer!.lastName}',
+          customerAddress: response.response![i].customer!.address!.line1,
+          sellerAddress: response.response![i].seller!.address!.line1,
         ));
       }
     }, onError: (err) {
