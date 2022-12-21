@@ -48,18 +48,18 @@ class OrdersDetailsPage extends GetView<OrdersDetailsController> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                        left: 10, top: 2, bottom: 5, right: 5),
-                    alignment: Alignment.center,
-                    child: Text(
-                      orderItems[index].category!,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppTheme.textPrimary,
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.only(
+                  //       left: 10, top: 2, bottom: 5, right: 5),
+                  //   alignment: Alignment.center,
+                  //   child: Text(
+                  //     orderItems[index].category!,
+                  //     style: TextStyle(
+                  //       fontSize: 14,
+                  //       color: AppTheme.textPrimary,
+                  //     ),
+                  //   ),
+                  // ),
                   Container(
                     margin: const EdgeInsets.only(
                         left: 10, top: 2, bottom: 5, right: 5),

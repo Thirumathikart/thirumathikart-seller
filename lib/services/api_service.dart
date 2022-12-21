@@ -210,7 +210,7 @@ class ApiManager extends GetConnect {
     }
   }
 
-  Future<List<FetchOrderResponse>> fetchOrder(
+  Future<FetchOrderResponse> fetchOrder(
       StorageServices storageServices) async {
     try {
       var jwt = storageServices.retriveJWT();
@@ -225,8 +225,8 @@ class ApiManager extends GetConnect {
       } else {
         if (response.statusCode == 200 && response.bodyString != null) {
           var fetchOrderResponses =
-              fetchOrderResponsesFromJson(response.bodyString!);
-          return fetchOrderResponses.fetchOrderResponse!;
+              fetchOrderResponseFromJson(response.bodyString!);
+          return fetchOrderResponses;
         }
         return Future.error('Unable To Fetch Order');
       }

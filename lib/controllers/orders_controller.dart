@@ -131,31 +131,31 @@ class OrdersController extends GetxController
   void fetchOrder() async {
     await api.fetchOrder(storageService).then((response) {
       order.value = [];
-      for (int i = 0; i < response.length; i++) {
+      for (int i = 0; i < response.response!.length; i++) {
         var total = 0;
         final orderItems = <OrderItemDisplay>[];
-        for (int j = 0; j < response[i].items!.length; j++) {
+        for (int j = 0; j < response.response![i].items!.length; j++) {
           orderItems.add(OrderItemDisplay(
-            name: response[i].items![j].name,
+            name: response.response![i].items![j].name,
             category: EditProductConstants
-                .categoryMap[response[i].items![j].categoryId]
+                .categoryMap[response.response![i].items![j].categoryId]
                 .toString(),
-            description: response[i].items![j].description,
-            price: response[i].items![j].price,
-            quantity: response[i].items![j].quantity,
+            description: response.response![i].items![j].description,
+            price: response.response![i].items![j].price,
+            quantity: response.response![i].items![j].quantity,
             totalPrice:
-                response[i].items![j].price! * response[i].items![j].quantity!,
+                response.response![i].items![j].price! * response.response![i].items![j].quantity!,
           ));
           total +=
-              response[i].items![j].price! * response[i].items![j].quantity!;
+              response.response![i].items![j].price! * response.response![i].items![j].quantity!;
         }
         order.add(OrderDisplay(
-          id: response[i].order!.id,
-          status: response[i].order!.orderStatus,
+          id: response.response![i].order!.id,
+          status: response.response![i].order!.orderStatus,
           totalAmount: total,
           orderItemsList: orderItems,
-          customerAddress: response[i].order!.customerAddressId,
-          sellerAddress: response[i].order!.sellerAddressId,
+          customerAddress: response.response![i].order!.customerAddressId,
+          sellerAddress: response.response![i].order!.sellerAddressId,
         ));
       }
     }, onError: (err) {
