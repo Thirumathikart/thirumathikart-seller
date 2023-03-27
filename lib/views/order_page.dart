@@ -9,7 +9,7 @@ class OrderPage extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Order Page'),
+        appBar: appBar(label: 'Order Page', context: context),
         body: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
           child: Column(
@@ -129,6 +129,13 @@ class OrderPage extends GetView<OrderController> {
                                             'Order Quantity : ${controller.ordersListDynamic[index].quantity!}',
                                           ),
                                         ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       bottom: 10.0),
+                                        //   child: Text(
+                                        //     'Weight : ${controller.ordersListDynamic[index].weight!}',
+                                        //   ),
+                                        // ),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               bottom: 10.0),

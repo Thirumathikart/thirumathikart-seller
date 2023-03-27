@@ -6,6 +6,7 @@ class Product {
   String? category;
   String? description;
   String? quantity;
+  String? productWeight;
   File? image;
   String? imageUrl;
   Product(
@@ -14,6 +15,7 @@ class Product {
       this.category,
       this.description,
       this.quantity,
+      this.productWeight,
       this.imageUrl,
       this.image});
 }

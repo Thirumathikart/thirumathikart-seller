@@ -9,7 +9,7 @@ class PastOrdersPage extends GetView<PastOrdersController> {
   const PastOrdersPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Past Orders'),
+        appBar: appBar(label: 'Past Orders', context: context),
         body: buildItems(orderList),
       );
   Widget buildItems(List<Map<String, Object>> orderList) => ListView.builder(

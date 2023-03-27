@@ -11,7 +11,7 @@ class ProductPage extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Product Page'),
+        appBar: appBar(label: 'Product Page', context: context),
         body: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
           child: Column(

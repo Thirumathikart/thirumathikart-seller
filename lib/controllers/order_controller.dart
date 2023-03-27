@@ -14,6 +14,7 @@ class OrderController extends GetxController {
       name: 'Tomato',
       image: 'assets/tomato.jpg',
       price: 10,
+      weight: '1kg',
       status: 'Prepared',
       quantity: 20,
       pickup: '',

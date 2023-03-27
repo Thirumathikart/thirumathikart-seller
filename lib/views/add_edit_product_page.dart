@@ -18,6 +18,7 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
       TextEditingController(text: '${Get.arguments.price ?? ' '}');
   final _descController =
       TextEditingController(text: '${Get.arguments.description ?? ' '}');
+
   final _quantityController =
       TextEditingController(text: '${Get.arguments.quantity ?? ' '}');
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -36,6 +37,7 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
         description: _descController.text,
         image: controller.image.value,
         quantity: _quantityController.text,
+        productWeight: controller.dropdownvalue1.value,
       );
       controller.updateProduct(product);
     } else {
@@ -45,7 +47,7 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar(name),
+        appBar: appBar(label: 'name', context: context),
         body: SingleChildScrollView(
             child: Form(
           key: _formkey,
@@ -94,8 +96,14 @@ class AddEditProductPage extends GetView<AddEditProductsController> {
                 productName: EditProductConstants.price,
                 namecontroller: _priceController,
               ),
+              // TODO: uncomment this when connection with the dropdown backend is fully understood
               const AddEditProductDropDown(
                   productName: EditProductConstants.category),
+              const AddEditProductDropDown(
+                productName: EditProductConstants.productWeight,
+                isCategory: false,
+              ),
+
               AddEditProductField(
                 productName: EditProductConstants.quantity,
                 namecontroller: _descController,

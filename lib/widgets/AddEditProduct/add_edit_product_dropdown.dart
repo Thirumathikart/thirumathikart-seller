@@ -6,9 +6,13 @@ import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/controllers/add_edit_products_controller.dart';
 
 class AddEditProductDropDown extends GetView<AddEditProductsController> {
-  const AddEditProductDropDown({Key? key, required this.productName})
-      : super(key: key);
+  const AddEditProductDropDown({
+    Key? key,
+    required this.productName,
+    this.isCategory = true,
+  }) : super(key: key);
   final String productName;
+  final bool isCategory;
   @override
   Widget build(BuildContext context) => Column(
         children: [
@@ -49,63 +53,92 @@ class AddEditProductDropDown extends GetView<AddEditProductsController> {
                   ],
                 ),
                 Obx(
-                  () => controller.isChange[productName]! ||
-                          Get.routing.current == NavigationRoutes.addProduct
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          width: double.infinity,
-                          height: 50,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
-                            child: DropdownButtonFormField(
-                              isDense: true,
-                              decoration: InputDecoration(
-                                fillColor: AppTheme.bg,
-                                contentPadding:
-                                    const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: BorderSide(
-                                    color: AppTheme.textPrimary,
+                  () =>
+                      // TODO: What's this?
+                      // controller.isChange[productName]! ||
+                      Get.routing.current == NavigationRoutes.addProduct
+                          ? Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              width: double.infinity,
+                              height: 50,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 0),
+                                child: DropdownButtonFormField(
+                                  isDense: true,
+                                  decoration: InputDecoration(
+                                    fillColor: AppTheme.bg,
+                                    contentPadding: const EdgeInsets.fromLTRB(
+                                        10, 10, 10, 0),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.textPrimary,
+                                      ),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      borderSide: BorderSide(
+                                          color: AppTheme.textPrimary),
+                                    ),
                                   ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      BorderSide(color: AppTheme.textPrimary),
+                                  isExpanded: false,
+                                  items: isCategory
+                                      ? EditProductConstants.categoryItems
+                                          .map((e) => DropdownMenuItem(
+                                                value: e,
+                                                child: Text(e),
+                                              ))
+                                          .toList()
+                                      : EditProductConstants.productWeightItems
+                                          .map((e) => DropdownMenuItem(
+                                                value: e,
+                                                child: Text(e),
+                                              ))
+                                          .toList(),
+                                  value: isCategory
+                                      ? controller.dropdownvalue.value
+                                      : controller.dropdownvalue1.value,
+                                  onChanged: (value) {
+                                    // TODO: include both dropdowns
+                                    if (isCategory) {
+                                      controller.updateDropdownValue(value);
+                                    } else {
+                                      controller.updateDropdownValue1(value);
+                                    }
+                                  },
+                                  // items1:
+                                  //     EditProductConstants.productWeightItems
+                                  //         .map((e) => DropdownMenuItem(
+                                  //               value: e,
+                                  //               child: Text(e),
+                                  //             ))
+                                  //         .toList(),
+                                  // value1: controller.dropdownvalue1.value,
+                                  // onChanged1: (value1) {
+                                  //   controller.updateDropdownValue1(value1);
+                                  // },
                                 ),
                               ),
-                              isExpanded: false,
-                              items: EditProductConstants.categoryItems
-                                  .map((e) => DropdownMenuItem(
-                                        value: e,
-                                        child: Text(e),
-                                      ))
-                                  .toList(),
-                              value: controller.dropdownvalue.value,
-                              onChanged: (value) {
-                                controller.updateDropdownValue(value);
-                              },
-                            ),
-                          ),
-                        )
-                      : Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 1),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: AppTheme.textPrimary),
-                              borderRadius: BorderRadius.circular(15),
-                              color: AppTheme.searchBar),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Text(controller.dropdownvalue.value,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                )),
-                          )),
+                            )
+                          : Container(
+                              width: double.infinity,
+                              height: 50,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 1),
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: AppTheme.textPrimary),
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: AppTheme.searchBar),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Text(controller.dropdownvalue.value,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              )),
                 ),
               ],
             ),

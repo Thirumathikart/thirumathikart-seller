@@ -9,5 +9,8 @@ class NavigationRoutes {
   static String pastOrdersRoute = '/pastOrders';
   static String order = '/order';
   static String product = '/product';
+  static String feedback = '/feedback';
+  static String sellerProfile = '/sellerProfile';
+  static String invoice = '/invoice';
   static String map = '/map';
 }

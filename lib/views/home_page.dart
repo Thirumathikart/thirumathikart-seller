@@ -10,7 +10,7 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: appBar('Home'),
+      appBar: appBar(label: 'Home', context: context, showLogout: true),
       body: Center(
           child: Column(
         children: [
@@ -52,6 +52,24 @@ class HomePage extends GetView<HomeController> {
             },
             child: const Text('Tracking Map'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(NavigationRoutes.feedback);
+            },
+            child: const Text('Feedback'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(NavigationRoutes.sellerProfile);
+            },
+            child: const Text('Seller Profile'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(NavigationRoutes.invoice);
+            },
+            child: const Text('Invoice'),
+          )
         ],
       ))); //TODO : Need to remove After PR review
 

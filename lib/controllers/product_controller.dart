@@ -11,6 +11,7 @@ class ProductController extends GetxController {
       name: 'Tomato',
       image: 'assets/tomato.jpg',
       price: 10,
+      weight: '1kg',
       parentId: 201,
       parentName: 'Vegetables',
       details: 'Fresh Juicy Tomato',

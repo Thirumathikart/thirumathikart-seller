@@ -9,7 +9,7 @@ class EarningPage extends GetView<EarningController> {
   const EarningPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Earning'),
+        appBar: appBar(label: 'Earning', context: context),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[

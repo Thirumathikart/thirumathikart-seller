@@ -20,6 +20,8 @@ import 'package:thirumathikart_seller/views/profile.dart';
 import 'package:thirumathikart_seller/views/earning.dart';
 import 'package:thirumathikart_seller/views/order_page.dart';
 import 'package:thirumathikart_seller/views/product_page.dart';
+import 'package:thirumathikart_seller/views/seller_profile.dart';
+import 'package:thirumathikart_seller/views/feedback_page.dart';
 
 class NavigationPages {
   static List<GetPage<dynamic>> getPages() => [
@@ -77,6 +79,15 @@ class NavigationPages {
           name: NavigationRoutes.map,
           page: MapPage.new,
           binding: MapBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.feedback,
+          page: FeedbackFormPage.new,
+          // binding: FeedbackBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.sellerProfile,
+          page: SellerPage.new,
         ),
       ];
 }
