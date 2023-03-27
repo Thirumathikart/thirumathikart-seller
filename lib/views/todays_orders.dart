@@ -10,7 +10,7 @@ class TodaysOrdersPage extends GetView<TodaysOrdersController> {
   const TodaysOrdersPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Todays Orders'),
+        appBar: appBar(label: 'Todays Orders', context: context),
         body: buildItems(orderList),
       );
   Widget buildItems(List<Map<String, Object>> orderList) => ListView.builder(

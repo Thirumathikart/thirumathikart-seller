@@ -32,7 +32,7 @@ class MapPage extends GetView<MapController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Map'),
+        appBar: appBar(label: 'Map', context: context),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,

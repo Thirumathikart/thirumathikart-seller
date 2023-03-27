@@ -7,6 +7,7 @@ import 'package:thirumathikart_seller/models/product.dart';
 class AddEditProductsController extends GetxController {
   var product = Product().obs;
   var dropdownvalue = EditProductConstants.categoryItems[0].obs;
+  var dropdownvalue1 = EditProductConstants.productWeightItems[0].obs;
   var isImageAdded = false.obs;
   var image = File('').obs;
   var isChange = {
@@ -14,6 +15,7 @@ class AddEditProductsController extends GetxController {
     EditProductConstants.price: false,
     EditProductConstants.category: false,
     EditProductConstants.description: false,
+    EditProductConstants.productWeight: false,
     EditProductConstants.quantity: false
   }.obs;
   @override
@@ -21,6 +23,9 @@ class AddEditProductsController extends GetxController {
     super.onInit();
     if (Get.arguments.category != null) {
       dropdownvalue.value = Get.arguments.category!;
+    }
+    if (Get.arguments.productWeight != null) {
+      dropdownvalue1.value = Get.arguments.productWeight!;
     }
   }
 
@@ -30,6 +35,10 @@ class AddEditProductsController extends GetxController {
 
   void updateDropdownValue(String? value) {
     dropdownvalue.value = value!;
+  }
+
+  void updateDropdownValue1(String? value) {
+    dropdownvalue1.value = value!;
   }
 
   Future<void> pickImage() async {

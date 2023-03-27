@@ -11,7 +11,7 @@ class LoginPage extends GetView<LoginController> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: appBar('Seller Login'),
+      appBar: appBar(label: 'Seller Login', context: context),
       body: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
