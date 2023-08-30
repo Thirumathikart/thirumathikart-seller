@@ -10,4 +10,6 @@ class NavigationRoutes {
   static String order = '/order';
   static String product = '/product';
   static String map = '/map';
+    static String myOrdersRoute = '/myOrdersRoute';
+  static String myOrdersDetailsRoute='/myOrdersDetailsRoute';
 }

@@ -30,7 +30,7 @@ class Thirumathikart extends GetView<LoginController> {
                 GoogleFonts.brawlerTextTheme(Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
         initialRoute: controller.userTokenFetch()
-            ? NavigationRoutes.profileRoute
+            ? NavigationRoutes.home
             : NavigationRoutes.loginRoute,
         getPages: NavigationPages.getPages(),
       );

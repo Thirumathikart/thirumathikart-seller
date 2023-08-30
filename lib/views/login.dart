@@ -65,7 +65,7 @@ class LoginPage extends GetView<LoginController> {
                                 child: Center(
                                   child: TextFormField(
                                     decoration: const InputDecoration(
-                                      hintText: 'Enter Number',
+                                      hintText: 'Enter Mail Id',
                                       border: InputBorder.none,
                                       contentPadding: EdgeInsets.only(
                                           left: 20.0, right: 20),

@@ -1,228 +1,167 @@
 import 'package:flutter/material.dart';
 import 'package:thirumathikart_seller/config/themes.dart';
+import 'package:thirumathikart_seller/constants/navigation_routes.dart';
 import 'package:thirumathikart_seller/controllers/order_controller.dart';
 import 'package:get/get.dart';
+import 'package:thirumathikart_seller/models/orders.dart';
 import 'package:thirumathikart_seller/widgets/app_bar.dart';
 
-class OrderPage extends GetView<OrderController> {
-  const OrderPage({Key? key}) : super(key: key);
+class OrdersPage extends GetView<OrderController> {
+  const OrdersPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: appBar('Order Page'),
-        body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Filter orders : ',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+  Widget build(BuildContext context) {
+    controller.fetchOrder();
+    return Scaffold(
+      appBar: appBar('My Orders'),
+      body: buildItems(),
+    );
+  }
+
+  Widget buildItems() => Obx(
+        () => ListView.builder(
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 32, bottom: 32),
+          itemBuilder: (context, orderIndex) {
+            final order = controller.order[orderIndex];
+            return Column(
+              children: [
+                Card(
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0.0, 1.0), //(x,y)
+                          blurRadius: 6.0,
                         ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Obx(
-                            () => ToggleButtons(
-                              borderColor: AppTheme.selected,
-                              fillColor: AppTheme.unSelected,
-                              borderWidth: 2,
-                              selectedBorderColor: AppTheme.selected,
-                              selectedColor: AppTheme.textSecondary,
-                              borderRadius: BorderRadius.circular(0),
-                              onPressed: (int index) {
-                                for (int i = 0;
-                                    i < controller.isSelected.length;
-                                    i++) {
-                                  controller.set(i, i == index);
-                                }
-                                if (controller.isSelected[0] == false &&
-                                    controller.isSelected[1] == true) {
-                                  // controller.reverse();
-                                }
-                                if (controller.isSelected[1] == false &&
-                                    controller.isSelected[0] == true) {
-                                  // controller.reverse();
-                                }
-                              },
-                              isSelected: controller.isSelected,
-                              children: const <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Text(
-                                    'All Orders',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Text(
-                                    'Pending',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 10, top: 2, bottom: 2, right: 5),
+                          alignment: Alignment.center,
+                          child: Text(
+                            // 'Order ID : ${order.id}',
+                            'Todays Orders',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.textPrimary,
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SingleChildScrollView(
-                child: Expanded(
-                  child: Obx(
-                    () => Container(
-                      height: MediaQuery.of(context).size.height - 150,
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: ListView.builder(
-                        itemBuilder: (ctx, index) => Column(children: [
-                          Container(
-                            height: 200.0,
-                            margin: const EdgeInsets.only(
-                                left: 10, right: 10, top: 8, bottom: 8),
-                            padding: const EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppTheme.textPrimary),
-                              borderRadius: BorderRadius.circular(10),
-                              color: AppTheme.textSecondary,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(width: 10.0),
-                                Expanded(
+                        ),
+                        // Display order details
+                        for (var orderItem in order.orderItemsList!)
+                          Column(
+                            children: [
+                              Card(
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
                                   child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 10.0),
-                                          child: Text(
-                                            'Item : ${controller.ordersListDynamic[index].name!}',
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16.0),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 10.0),
-                                          child: Text(
-                                            'Order Quantity : ${controller.ordersListDynamic[index].quantity!}',
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 10.0),
-                                          child: Text(
-                                            'Total : ₹ ${controller.ordersListDynamic[index].price! * controller.ordersListDynamic[index].quantity!}',
-                                          ),
-                                        ),
-                                        const Text(
-                                          'Order ready for pickup?',
-                                        ),
-                                        Obx(
-                                          () => SizedBox(
-                                            height: 30,
-                                            width: 120,
-                                            child: RadioListTile(
-                                                title: const Text('Yes'),
-                                                dense: true,
-                                                value: 'yes',
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30)),
-                                                groupValue: (controller
-                                                        .ordersListDynamic[
-                                                            index]
-                                                        .pickup)
-                                                    .toString(),
-                                                onChanged: (value) {
-                                                  controller.setOrderType(
-                                                      value!, index);
-                                                }),
-                                          ),
-                                        ),
-                                        Obx(
-                                          () => SizedBox(
-                                            height: 30,
-                                            width: 120,
-                                            child: RadioListTile(
-                                                title: const Text('No'),
-                                                dense: true,
-                                                value: 'no',
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30)),
-                                                groupValue: (controller
-                                                        .ordersListDynamic[
-                                                            index]
-                                                        .pickup)
-                                                    .toString(),
-                                                onChanged: (value) {
-                                                  controller.setOrderType(
-                                                      value!, index);
-                                                }),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10.0),
-                                      ]),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 110.0,
-                                      height: 110.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(controller
-                                              .ordersListDynamic[index].image!),
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Product Name: ${orderItem.name}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppTheme.textPrimary,
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 20.0),
-                                    Text(
-                                      'Status : ${controller.ordersListDynamic[index].status!}',
-                                    ),
-                                  ],
-                                )
-                              ],
+                                      Text(
+                                        'Quantity: ${orderItem.quantity}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppTheme.textPrimary,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Price: ${orderItem.price}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppTheme.textPrimary,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Total Price: ${orderItem.totalPrice}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppTheme.textPrimary,
+                                        ),
+                                      ),
+                                      // Add more product details as needed
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              // Order status button for each order item
+                             ElevatedButton(
+  onPressed: () {
+    // Display a snackbar with a confirmation message
+    Get.snackbar(
+      'Order Status',
+      'Are you sure you want to mark the entire order as delivered?',
+      duration: Duration(seconds: 5),
+      mainButton: TextButton(
+        onPressed: () {
+          // You can add the logic to change the order status here
+          // For example:
+          // controller.changeOrderStatus(orderIndex);
+          Get.back(); // Close the snackbar
+        },
+        child: Text(
+          'OK',
+          style: TextStyle(color: Color.fromARGB(255, 227, 12, 12)),
+        ),
+      ),
+    );
+  },
+  child: Text('Mark Order as Shipped'),
+),
+
+                              SizedBox(height: 16),
+                            ],
+                          ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 10, top: 2, bottom: 5, right: 5),
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Order Status : ${order.status}',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: AppTheme.textPrimary,
                             ),
                           ),
-                        ]),
-                        itemCount: controller.length(),
-                      ),
+                        ),
+                        // Add the order status button here for the entire order
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     // You can add the logic to change the order status here
+                        //     // For example:
+                             
+                          
+                        //   },
+                        //   child: Text('Mark Entire Order as Delivered'),
+                        // ),
+
+                        
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
+                // Add any spacing you want between the cards
+                SizedBox(height: 16),
+              ],
+            );
+          },
+          itemCount: controller.order.length,
         ),
       );
 }
